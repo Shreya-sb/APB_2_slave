@@ -25,7 +25,7 @@ class APB_2monitor_2 extends uvm_monitor;
  
   // Run phase
   task run_phase(uvm_phase phase);
-    
+    //Define a task for run phase 
   endtask
  
 endclass
