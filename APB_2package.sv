@@ -1,8 +1,8 @@
 //import uvm_pkg::*;
 //`include "uvm_macros.svh"
-
 `include "APB_2interface.sv"
 `include "APB_2sequence_item.sv"
+`include "APB_2coverage.sv"
 `include "APB_2sequence.sv"
 `include "APB_2sequencer.sv"
 `include "APB_2driver.sv"
