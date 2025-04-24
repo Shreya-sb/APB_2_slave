@@ -1,3 +1,4 @@
 # APB_2_slave
 This design implements a simple APB (Advanced Peripheral Bus) protocol-based communication system, where both the APB Master and Slave modules are included as part of the Design Under Test (DUT). The DUT operates based on the AMBA APB protocol, which is a low-power, low-complexity interface suitable for simple peripheral communication.APB Slave responds to these transactions based on the APB control signals. It acknowledges transactions using the PREADY signal and either stores incoming data (write operation) or returns stored data (read operation).
+
 ![APB_2slave drawio](https://github.com/user-attachments/assets/b98ecb39-8bb7-405a-9c04-76ec8d90c54f)
