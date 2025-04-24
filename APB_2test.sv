@@ -63,7 +63,7 @@ class APB_2write_test extends APB_2test;
   virtual task run_phase(uvm_phase phase);
     APB_2writeSequence_0 seq;
     phase.raise_objection(this);
-    seq = APB_2sequence::type_id::create("seq");
+    seq = APB_2writeSequence_0::type_id::create("seq");
     seq.start(env.active_agent.APB_2seqr);
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this,30); 

@@ -30,25 +30,25 @@ class APB_2monitor_2 extends uvm_monitor;
   // Run phase
   task run_phase(uvm_phase phase);
     //Define a task for run phase 
-     repeat(1)@(vif.monitor_1_cb);
+     repeat(1)@(vif.APB_2monitor_cb);
     forever begin
-      @(vif.monitor_1_cb)
+      @(vif.APB_2monitor_cb)
       
       // Sample DUT information and populate the transaction
       APB_2mon_item = APB_2sequence_item::type_id::create("APB_2mon_item", this);
-      APB_2mon_item.transfer         = vif.monitor_1_cb.transfer;
-      APB_2mon_item.READ_WRITE       = vif.monitor_1_cb.READ_WRITE;
-      APB_2mon_item.apb_write_paddr  = vif.monitor_1_cb.apb_write_paddr;
-      APB_2mon_item.apb_write_data   = vif.monitor_1_cb.apb_write_data;
-      APB_2mon_item.apb_read_paddr   = vif.monitor_1_cb.apb_read_paddr;
-      APB_2mon_item.apb_read_data_out= vif.monitor_1_cb.apb_read_data_out;
+      APB_2mon_item.transfer         = vif.APB_2monitor_cb.transfer;
+      APB_2mon_item.READ_WRITE       = vif.APB_2monitor_cb.READ_WRITE;
+      APB_2mon_item.apb_write_paddr  = vif.APB_2monitor_cb.apb_write_paddr;
+      APB_2mon_item.apb_write_data   = vif.APB_2monitor_cb.apb_write_data;
+      APB_2mon_item.apb_read_paddr   = vif.APB_2monitor_cb.apb_read_paddr;
+      APB_2mon_item.apb_read_data_out= vif.APB_2monitor_cb.apb_read_data_out;
 
       
       // Broadcast the transaction using the analysis port
-      item_collect_port.write(APB_2mon_item);
+      item_collect_port2.write(APB_2mon_item);
       
       `uvm_info("MONITOR_1",$sformatf("transfer=%0d READ_WRITE=%0d apb_write_paddr=%0d,apb_write_data=%0d,apb_read_paddr=%0d,apb_read_data_out=%0d",APB_2mon_item.transfer,APB_2mon_item.READ_WRITE,APB_2mon_item.apb_write_paddr,APB_2mon_item.apb_write_data,APB_2mon_item.apb_read_paddr,APB_2mon_item.apb_read_data_out),UVM_LOW)
-	  repeat(2)@(vif.monitor_1_cb); 
+	  repeat(2)@(vif.APB_2monitor_cb); 
     end
   endtask
  

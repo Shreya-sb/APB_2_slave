@@ -32,5 +32,16 @@ class APB_2driver extends uvm_driver#(APB_2sequence_item);
   //Drive task to drive all the signals into the DUT
   task drive();
     //drive data
+ @(vif.APB_2driver_cb)
+    begin
+      vif.APB_2driver_cb.transfer <= req.transfer;
+      vif.APB_2driver_cb.READ_WRITE <= req.READ_WRITE;
+      vif.APB_2driver_cb.apb_write_paddr <= req.apb_write_paddr;
+      vif.APB_2driver_cb.apb_write_data <= req.apb_write_data;
+      vif.APB_2driver_cb.apb_read_paddr <= req.apb_read_paddr;
+      `uvm_info("driver", $sformatf("----Driver----"), UVM_LOW);
+      req.print();
+      `uvm_info("driver", $sformatf("----Driver----"), UVM_LOW); 
+ end
   endtask
 endclass

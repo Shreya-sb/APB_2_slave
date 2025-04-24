@@ -44,13 +44,13 @@ class APB_2scoreboard extends uvm_scoreboard;
   endfunction
 
   //Write methods to capture transactions from monitors
-  function void write_monitor1(APB_2sequence_item input_trans);
+  function void write_monitor1port(APB_2sequence_item input_trans);
     $display("Entered monitor1 write");
     input_queue.push_back(input_trans);
   endfunction
   
  
-  function void write_monitor2(APB_2sequence_item output_trans);
+  function void write_monitor2port(APB_2sequence_item output_trans);
     $display("Entered monitor2 write");
     output_queue.push_back(output_trans);
   endfunction

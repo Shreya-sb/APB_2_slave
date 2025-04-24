@@ -1,0 +1,143 @@
+# vsim -c top 
+# Start time: 15:44:00 on Apr 24,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: APB_2sequence.sv(17): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+# //  Questa Sim
+# //  Version 10.6c linux Jul 25 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading mtiUvm.uvm_pkg
+# Loading work.APB_2top_sv_unit(fast)
+# Loading work.top(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading work.APB_2interface(fast)
+# Loading /tools/mentor/questasim_10.6c/questasim/uvm-1.1d/linux/uvm_dpi.so
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# UVM_INFO @ 0: reporter [RNTST] Running test APB_2write_test...
+# ----------------------------------------------------------------------
+# Name                        Type                           Size  Value
+# ----------------------------------------------------------------------
+# uvm_test_top                APB_2write_test                -     @471 
+#   env                       APB_2environment               -     @478 
+#     active_agent            APB_2active_agent              -     @485 
+#       APB_2dri              APB_2driver                    -     @616 
+#         item_collect_port   uvm_analysis_port              -     @639 
+#         rsp_port            uvm_analysis_port              -     @631 
+#         seq_item_port       uvm_seq_item_pull_port         -     @623 
+#       APB_2mon_1            APB_2monitor_1                 -     @647 
+#         item_collect_port   uvm_analysis_port              -     @655 
+#       APB_2seqr             APB_2sequencer                 -     @507 
+#         rsp_export          uvm_analysis_export            -     @514 
+#         seq_item_export     uvm_seq_item_pull_imp          -     @608 
+#         arbitration_queue   array                          0     -    
+#         lock_queue          array                          0     -    
+#         num_last_reqs       integral                       32    'd1  
+#         num_last_rsps       integral                       32    'd1  
+#     passive_agent           APB_2passive_agent             -     @499 
+#       APB_2mon_2            APB_2monitor_2                 -     @670 
+#         item_collect_port2  uvm_analysis_port              -     @677 
+#     scoreboard              APB_2scoreboard                -     @492 
+#       item_collect1_export  uvm_analysis_imp_monitor1port  -     @686 
+#       item_collect2_export  uvm_analysis_imp_monitor2port  -     @694 
+# ----------------------------------------------------------------------
+# UVM_INFO APB_2driver.sv(42) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----Driver----
+# ----------------------------------------------------------------------------------------------------
+# Name                           Type                Size  Value                                      
+# ----------------------------------------------------------------------------------------------------
+# item                           APB_2sequence_item  -     @714                                       
+#   transfer                     integral            1     'h1                                        
+#   READ_WRITE                   integral            1     'h1                                        
+#   apb_write_paddr              integral            9     'h0                                        
+#   apb_write_data               integral            8     'h0                                        
+#   apb_read_paddr               integral            9     'h0                                        
+#   apb_read_data_out            integral            8     'h0                                        
+#   begin_time                   time                64    0                                          
+#   depth                        int                 32    'd2                                        
+#   parent sequence (name)       string              3     seq                                        
+#   parent sequence (full name)  string              43    uvm_test_top.env.active_agent.APB_2seqr.seq
+#   sequencer                    string              39    uvm_test_top.env.active_agent.APB_2seqr    
+# ----------------------------------------------------------------------------------------------------
+# UVM_INFO APB_2driver.sv(44) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----Driver----
+# Entered monitor2 write
+# UVM_INFO APB_2monitor_2.sv(50) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=0,apb_write_data=0,apb_read_paddr=0,apb_read_data_out=0
+# Entered monitor1 write
+# UVM_INFO APB_2monitor_1.sv(48) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=  0,apb_write_data=  0,apb_read_paddr=  0
+# ----------------------------------------------------
+# Name                 Type                Size  Value
+# ----------------------------------------------------
+# APB_2mon_item        APB_2sequence_item  -     @742 
+#   transfer           integral            1     'h1  
+#   READ_WRITE         integral            1     'h1  
+#   apb_write_paddr    integral            9     'h0  
+#   apb_write_data     integral            8     'h0  
+#   apb_read_paddr     integral            9     'h0  
+#   apb_read_data_out  integral            8     'h0  
+# ----------------------------------------------------
+# UVM_INFO APB_2scoreboard.sv(63) @ 15: uvm_test_top.env.scoreboard [READ AND WRITE Match] 
+# ----------------------------------------------------
+# Name                 Type                Size  Value
+# ----------------------------------------------------
+# APB_2mon_item        APB_2sequence_item  -     @747 
+#   transfer           integral            1     'h1  
+#   READ_WRITE         integral            1     'h1  
+#   apb_write_paddr    integral            9     'h0  
+#   apb_write_data     integral            8     'h0  
+#   apb_read_paddr     integral            9     'h0  
+#   apb_read_data_out  integral            8     'h0  
+# ----------------------------------------------------
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 35: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO APB_2test.sv(36) @ 35: uvm_test_top [APB_2write_test] ----------------
+# UVM_INFO APB_2test.sv(37) @ 35: uvm_test_top [APB_2write_test] --  TEST PASS --
+# UVM_INFO APB_2test.sv(38) @ 35: uvm_test_top [APB_2write_test] ----------------
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :   12
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [APB_2write_test]     3
+# [MONITOR_1]     2
+# [Questa UVM]     2
+# [READ AND WRITE Match]     1
+# [RNTST]     1
+# [TEST_DONE]     1
+# [driver]     2
+# ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 35 ns  Iteration: 53  Instance: /top
+# End time: 15:44:08 on Apr 24,2025, Elapsed time: 0:00:08
+# Errors: 0, Warnings: 1
