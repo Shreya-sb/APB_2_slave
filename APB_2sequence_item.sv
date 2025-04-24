@@ -24,12 +24,13 @@ class APB_2sequence_item extends uvm_sequence_item;
   endfunction
   
   constraint c1 { if(transfer ==0)
-                 READ_WRITE==0;
+                 {READ_WRITE==0;
                  apb_write_paddr==0;
                  apb_write_data==0;
                  apb_read_paddr==0;
                  apb_read_data_out==0;
-                }
+                }}
+
   constraint c2 {
     apb_write_paddr[8] dist {0:=1,1:=1};
   }

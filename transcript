@@ -1,6 +1,6 @@
 # vsim -c top 
-# Start time: 15:44:00 on Apr 24,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Start time: 16:45:12 on Apr 24,2025
+# ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: APB_2sequence.sv(17): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
@@ -79,9 +79,9 @@
 # item                           APB_2sequence_item  -     @714                                       
 #   transfer                     integral            1     'h1                                        
 #   READ_WRITE                   integral            1     'h1                                        
-#   apb_write_paddr              integral            9     'h0                                        
-#   apb_write_data               integral            8     'h0                                        
-#   apb_read_paddr               integral            9     'h0                                        
+#   apb_write_paddr              integral            9     'h57                                       
+#   apb_write_data               integral            8     'h94                                       
+#   apb_read_paddr               integral            9     'h1c9                                      
 #   apb_read_data_out            integral            8     'h0                                        
 #   begin_time                   time                64    0                                          
 #   depth                        int                 32    'd2                                        
@@ -91,18 +91,18 @@
 # ----------------------------------------------------------------------------------------------------
 # UVM_INFO APB_2driver.sv(44) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----Driver----
 # Entered monitor2 write
-# UVM_INFO APB_2monitor_2.sv(50) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=0,apb_write_data=0,apb_read_paddr=0,apb_read_data_out=0
+# UVM_INFO APB_2monitor_2.sv(50) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=87,apb_write_data=148,apb_read_paddr=457,apb_read_data_out=0
 # Entered monitor1 write
-# UVM_INFO APB_2monitor_1.sv(48) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=  0,apb_write_data=  0,apb_read_paddr=  0
+# UVM_INFO APB_2monitor_1.sv(48) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr= 87,apb_write_data=148,apb_read_paddr=457
 # ----------------------------------------------------
 # Name                 Type                Size  Value
 # ----------------------------------------------------
 # APB_2mon_item        APB_2sequence_item  -     @742 
 #   transfer           integral            1     'h1  
 #   READ_WRITE         integral            1     'h1  
-#   apb_write_paddr    integral            9     'h0  
-#   apb_write_data     integral            8     'h0  
-#   apb_read_paddr     integral            9     'h0  
+#   apb_write_paddr    integral            9     'h57 
+#   apb_write_data     integral            8     'h94 
+#   apb_read_paddr     integral            9     'h1c9
 #   apb_read_data_out  integral            8     'h0  
 # ----------------------------------------------------
 # UVM_INFO APB_2scoreboard.sv(63) @ 15: uvm_test_top.env.scoreboard [READ AND WRITE Match] 
@@ -112,9 +112,9 @@
 # APB_2mon_item        APB_2sequence_item  -     @747 
 #   transfer           integral            1     'h1  
 #   READ_WRITE         integral            1     'h1  
-#   apb_write_paddr    integral            9     'h0  
-#   apb_write_data     integral            8     'h0  
-#   apb_read_paddr     integral            9     'h0  
+#   apb_write_paddr    integral            9     'h57 
+#   apb_write_data     integral            8     'h94 
+#   apb_read_paddr     integral            9     'h1c9
 #   apb_read_data_out  integral            8     'h0  
 # ----------------------------------------------------
 # UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 35: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
@@ -139,5 +139,5 @@
 # [driver]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 35 ns  Iteration: 53  Instance: /top
-# End time: 15:44:08 on Apr 24,2025, Elapsed time: 0:00:08
+# End time: 16:45:21 on Apr 24,2025, Elapsed time: 0:00:09
 # Errors: 0, Warnings: 1
