@@ -1,8 +1,8 @@
- import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "APB_2active_agent.sv"
-`include "APB_2passive_agent.sv"
-`include "APB_2scoreboard.sv"
+// import uvm_pkg::*;
+//`include "uvm_macros.svh"
+//`include "APB_2active_agent.sv"
+//`include "APB_2passive_agent.sv"
+//`include "APB_2scoreboard.sv"
 
 
 class APB_2environment extends uvm_env;

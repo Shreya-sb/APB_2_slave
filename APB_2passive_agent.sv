@@ -1,6 +1,6 @@
- import uvm_pkg::*;
- `include "uvm_macros.svh"
-`include "APB_2monitor_2.sv"
+// import uvm_pkg::*;
+// `include "uvm_macros.svh"
+//`include "APB_2monitor_2.sv"
 
 class APB_2passive_agent extends uvm_agent;
  

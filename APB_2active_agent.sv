@@ -1,9 +1,9 @@
- import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "APB_2sequence_item.sv"
-`include "APB_2driver.sv"
-`include "APB_2sequencer.sv"
-`include "APB_2monitor_1.sv"
+// import uvm_pkg::*;
+//`include "uvm_macros.svh"
+//`include "APB_2sequence_item.sv"
+//`include "APB_2driver.sv"
+//`include "APB_2sequencer.sv"
+//`include "APB_2monitor_1.sv"
 
 class APB_2active_agent extends uvm_agent;
  

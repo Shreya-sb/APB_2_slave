@@ -1,6 +1,6 @@
- import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "APB_2sequence_item.sv"
+ //import uvm_pkg::*;
+//`include "uvm_macros.svh"
+//`include "APB_2sequence_item.sv"
 
 class APB_2monitor_2 extends uvm_monitor;
   `uvm_component_utils(APB_2monitor_2)

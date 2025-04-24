@@ -1,6 +1,6 @@
- import uvm_pkg::*;
- `include "uvm_macros.svh"
-`include "APB_2sequence_item.sv"
+// import uvm_pkg::*;
+// `include "uvm_macros.svh"
+//`include "APB_2sequence_item.sv"
 
 `uvm_analysis_imp_decl(_monitor1port)
 `uvm_analysis_imp_decl(_monitor2port)

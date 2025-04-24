@@ -1,0 +1,8 @@
+# vsim -c top 
+# Start time: 12:55:59 on Apr 24,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): (vopt-7063) APB_2monitor_2.sv(48): Failed to find 'item_collect_port' in hierarchical name '/$root/item_collect_port/write'.
+# Optimization failed
+# Error loading design
+# End time: 12:56:00 on Apr 24,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

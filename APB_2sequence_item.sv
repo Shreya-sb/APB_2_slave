@@ -1,6 +1,5 @@
-//`include "APB_2sequence_item.sv"
-import uvm_pkg::*;
-`include "uvm_macros.svh"
+//import uvm_pkg::*;
+//`include "uvm_macros.svh"
 
 class APB_2sequence_item extends uvm_sequence_item;
   

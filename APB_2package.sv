@@ -1,5 +1,5 @@
-import uvm_pkg::*;
-`include "uvm_macros.svh"
+//import uvm_pkg::*;
+//`include "uvm_macros.svh"
 
 `include "APB_2interface.sv"
 `include "APB_2sequence_item.sv"

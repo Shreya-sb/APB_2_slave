@@ -40,14 +40,19 @@ class APB_2test extends uvm_test;
 endfunction
 endclass
 
-class apb_write_seq_test extends APB_2test;
+class APB_2write_test extends APB_2test;
 
-  `uvm_component_utils(apb_write_seq_test)
+  `uvm_component_utils(APB_2write_test)
 
 //Constructor
-  function new(string name = "apb_write_seq_test",uvm_component parent);
+  function new(string name = "APB_2write_test",uvm_component parent);
     super.new(name,parent);
   endfunction
+
+ //connect phase 
+ virtual function void connect_phase(uvm_phase phase);
+   super.connect_phase(phase);
+ endfunction
 
  //end_of_elaboration phase
   virtual function void end_of_elaboration();
@@ -56,10 +61,10 @@ class apb_write_seq_test extends APB_2test;
  
  //run phase 
   virtual task run_phase(uvm_phase phase);
-    apb_write_seq seq;
-    seq = apb_write_seq::type_id::create("seq");
+    APB_2writeSequence_0 seq;
     phase.raise_objection(this);
-    seq.start(env.active_agent.APB_2seq);
+    seq = APB_2sequence::type_id::create("seq");
+    seq.start(env.active_agent.APB_2seqr);
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this,30); 
   endtask 
