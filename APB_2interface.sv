@@ -1,4 +1,7 @@
-`include "APB2slave_define.sv"
+//`include "APB2slave_define.sv"
+import uvm_pkg::*;
+`include "uvm_macros.svh"
+
 interface APB_2interface(input bit pclk,presetn);
   logic transfer;
   logic READ_WRITE;
@@ -11,15 +14,15 @@ interface APB_2interface(input bit pclk,presetn);
     default input #0 output #0;
     output transfer;
     output READ_WRITE;
-    output [7:0]apb_write_paddr;
-    output [7:0]apb_write_data;
-    output [7:0]apb_read_paddr;
+    output apb_write_paddr;
+    output apb_write_data;
+    output apb_read_paddr;
     input presetn;
   endclocking
   
   clocking APB_2monitor_cb @(posedge pclk);
     default input #0 output #0;
-    input [7:0]apb_read_data_out;
+    input apb_read_data_out;
   endclocking
   
   modport APB_2DRV   (clocking APB_2driver_cb);

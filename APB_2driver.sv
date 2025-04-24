@@ -1,3 +1,7 @@
+ import uvm_pkg::*;
+ `include "uvm_macros.svh"
+//`include "APB_2sequence_item.sv"
+
 class APB_2driver extends uvm_driver#(APB_2sequence_item);
 
   virtual APB_2interface.APB_DRV vif;
@@ -22,6 +26,7 @@ class APB_2driver extends uvm_driver#(APB_2sequence_item);
       seq_item_port.get_next_item(req);
       drive();
       seq_item_port.item_done();
+    end
   endtask
   
   //Drive task to drive all the signals into the DUT

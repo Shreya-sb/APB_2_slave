@@ -1,3 +1,8 @@
+ import uvm_pkg::*;
+ `include "uvm_macros.svh"
+`include "APB_2sequence_item.sv"
+
+
 class APB_2sequence extends uvm_sequence#(APB_2sequence_item);
   `uvm_object_utils(APB_2sequence)
   
