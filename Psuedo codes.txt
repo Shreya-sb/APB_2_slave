@@ -1,109 +1,96 @@
 
 INTERFACE:
 
-Define an interface named APB_2interface with inputs:
- Declare various logic signals for APB transactions:
- Define a clocking block for the driver (APB_2driver_cb):
+-Define an interface named APB_2interface with inputs:
+- Declare various logic signals for APB transactions:
+- Define a clocking block for the driver (APB_2driver_cb):
       - Set default delays for input and output to 0
                -  Declare outputs
                - Declare input
 
-  Define a clocking block for the monitor (APB_2monitor_cb):
+-  Define a clocking block for the monitor (APB_2monitor_cb):
                  - Triggered on the rising edge of pclk
                  - Set default delays      
-- Declare input
-
-Define modports
-End of interface
-
-
-
+-Define modports
+-End of interface
 
 
 SEQUENCE ITEM
 
-Define an class named APB_2sequence_item with inputs:
-Randomize input signals
-Declare output signal as non random field
-Factory registeration for all the signals
-Declare a new constructor
-
-
-
+-Define an class named APB_2sequence_item with inputs:
+-Randomize input signals
+-Declare output signal as non random field
+-Factory registeration for all the signals
+-Declare a new constructor
 
 
 SEQUENCER
 
-Sequencer is used to in order to coordinate between sequence and driver.
-Class name is apb_sequencer which extends from the uvm_sequencer.
-Factory registration of the class.
-Defining new() constructor.
-
-
-
+-Sequencer is used to in order to coordinate between sequence and driver.
+-Class name is apb_sequencer which extends from the uvm_sequencer.
+-Factory registration of the class.
+-Defining new() constructor.
 
 DRIVER
 
-Define a class called APB_2driver  extending from uvm_driver
-Declare a virtual interface handle to APB_2interface
- Register this class with the UVM factory
-Declare an analysis port
-Define a new constructor
-Define a build phase
-Define a task for run phase implementing handshaking mechanisms between sequence and driver
-To Drive the APB signals drive task is declared
-
-
+-Define a class called APB_2driver  extending from uvm_driver
+-Declare a virtual interface handle to APB_2interface
+- Register this class with the UVM factory
+-Declare an analysis port
+-Define a new constructor
+-Define a build phase
+-Define a task for run phase implementing handshaking mechanisms between sequence and driver
+-To Drive the APB signals drive task is declared
 
 
 ACTIVE AGENT:
 
-Define a class called APB_2active_agent that extends from the base class uvm_agent
-Register the class with the UVM factory
- Declare  a handle for sequencer and driver
-Define a new constructor method
-Define the build_phase method
- Define the connect_phase method:
+-Define a class called APB_2active_agent that extends from the base class uvm_agent
+-Register the class with the UVM factory
+- Declare  a handle for sequencer and driver
+-Define a new constructor method
+-Define the build_phase method
+- Define the connect_phase method:
    
 PASSIVE AGENT:
 
-Define a class called APB_2passive_agent that extends from uvm_agent
-Register the component with the UVM factory
-Declare A monitor handle
-Define a new constructor method
-Define the build_phase method
+-Define a class called APB_2passive_agent that extends from uvm_agent
+-Register the component with the UVM factory
+-Declare A monitor handle
+-Define a new constructor method
+-Define the build_phase method
 
- 
 INPUT MONITOR:
-Define a class called APB_2monitor_1 that extends from uvm_monitor
-Register the component with the UVM factory
-Declare:
+
+-Define a class called APB_2monitor_1 that extends from uvm_monitor
+-Register the component with the UVM factory
+-Declare:
             - A virtual interface handle for APB_2interface 
             - An analysis port named item_collect_port 
             - A handle for the sequence item
-  Define a new constructor method
-Define the build_phase method
+-  Define a new constructor method
+-Define the build_phase method
             - Call the base build_phase
             - Create the analysis port
             - Fetch the virtual interface from the UVM config DB
-Define a task for run phase 
+-Define a task for run phase 
 
 ENVIRONMENT
 
-Define a class called APB_2environment that extends from uvm_env
-Register the component with the UVM factory
-Declare the following components:
+-Define a class called APB_2environment that extends from uvm_env
+-Register the component with the UVM factory
+-Declare the following components:
           -  instance of  active_agent
            - instance of passive_agent
            -  instance of scoreboard 
            - instance of coverage
-  Define a new constructor method
-Define the build_phase method
+-  Define a new constructor method
+-Define the build_phase method
                  - Create the active agent
                 - Create the scoreboard 
                - Create the coverage collector 
                - Create the passive agent
- Define the connect_phase method:
+- Define the connect_phase method:
 - Connect the item_collect_port of the active agent’s driver to the scoreboard’s input export
                 - connect active agent’s output to coverage collector
                 - Connect the item_collect_port2 of the passive agent’s monitor to the scoreboard’s second input export
@@ -111,29 +98,29 @@ ENVIRONMENT
 
 SCOREBOARD
 
-Define a class APB_2scoreboard extending uvm_scoreboard
-Declare a virtual interface handle to APB_2interface
-Register the scoreboard with the UVM factory
+-Define a class APB_2scoreboard extending uvm_scoreboard
+-Declare a virtual interface handle to APB_2interface
+-Register the scoreboard with the UVM factory
 
-  Declare:
+-  Declare:
               - Two analysis exports:
               - item_collect1_export: receives items from the input monitor
               - item_collect2_export: receives items from the output monitor
 
-    Two queues to store incoming transactions temporarily:
+-    Two queues to store incoming transactions temporarily:
               - mon1_items: stores transactions from the input monitor
               - mon2_items: stores transactions from the output monitor
 
-2 Sequence item handle to store transaction
-Define a new constructor method
-Define Build phase to Create the analysis exports
-Write methods to capture transactions from monitors
+-2 Sequence item handle to store transaction
+-Define a new constructor method
+-Define Build phase to Create the analysis exports
+-Write methods to capture transactions from monitors
 - write_item1: triggered when an item is received from the input monitor
                   - Store the item in mon1_items queue
 - write_item2: triggered when an item is received from the output monitor
                   - Store the item in mon2_items queue
 
-Run phase (or a compare task):
+-Run phase (or a compare task):
              - Loop forever or periodically:
              - If both mon1_items and mon2_items queues are non-empty:
             - Pop one item from each queue
