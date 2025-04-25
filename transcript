@@ -1,7 +1,6 @@
 # vsim -c top 
-# Start time: 21:06:29 on Apr 24,2025
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Warning: APB_2sequence.sv(17): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+# Start time: 13:41:06 on Apr 25,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
 # //
@@ -150,5 +149,5 @@
 # [driver]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 35 ns  Iteration: 53  Instance: /top
-# End time: 21:06:43 on Apr 24,2025, Elapsed time: 0:00:14
-# Errors: 2, Warnings: 1
+# End time: 13:41:33 on Apr 25,2025, Elapsed time: 0:00:27
+# Errors: 2, Warnings: 0
