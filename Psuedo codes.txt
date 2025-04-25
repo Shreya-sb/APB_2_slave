@@ -23,6 +23,16 @@ SEQUENCE ITEM
 -Factory registeration for all the signals
 -Declare a new constructor
 
+SEQUENCE
+
+Define class APB_2sequence
+    -Register the sequence with the UVM factory
+    -Sequence item handle to store transaction
+    -Define a new constructor method
+    -Define a virtual task body()which
+              - Creates and sends a randomized APB_2sequence_item
+              - Calls wait_for_grant(), randomize(), send_request(), wait_for_item_done()
+    -similarly write other sequences extending from APB_2sequence
 
 SEQUENCER
 
@@ -67,6 +77,21 @@ INPUT MONITOR:
 -Declare:
             - A virtual interface handle for APB_2interface 
             - An analysis port named item_collect_port 
+            - A handle for the sequence item
+-  Define a new constructor method
+-Define the build_phase method
+            - Call the base build_phase
+            - Create the analysis port
+            - Fetch the virtual interface from the UVM config DB
+-Define a task for run phase 
+
+OUTPUT MONITOR:
+
+-Define a class called APB_2monitor_2 that extends from uvm_monitor
+-Register the component with the UVM factory
+-Declare:
+            - A virtual interface handle for APB_2interface 
+            - An analysis port named item_collect_port2 
             - A handle for the sequence item
 -  Define a new constructor method
 -Define the build_phase method
