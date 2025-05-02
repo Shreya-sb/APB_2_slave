@@ -57,16 +57,34 @@ class APB_2scoreboard extends uvm_scoreboard;
   
     // Comparison logic
   function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item output_trans);
-    if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out)
+   if(monitor1_trans.READ_WRITE)
+   begin
+    if( monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out && monitor1_trans.apb_read_paddr == monitor2_trans.apb_read_paddr)
       begin
         monitor1_trans.print();
-        `uvm_info("READ AND WRITE Match","",UVM_LOW)
+        `uvm_info("READ  Match","",UVM_LOW)
         monitor2_trans.print();
       end
     else begin
       monitor1_trans.print();
-      `uvm_error("READ AND WRITE Mismatch","")
+      `uvm_error("READ Mismatch","")
       monitor2_trans.print();
+    end
+   end
+   else
+    begin
+     if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_write_paddr == monitor2_trans.apb_write_paddr)
+      begin
+        monitor1_trans.print();
+        `uvm_info(" WRITE Match","",UVM_LOW)
+        monitor2_trans.print();
+      end
+    else begin
+      monitor1_trans.print();
+      `uvm_error("WRITE Mismatch","")
+      monitor2_trans.print();
+    end
+
     end
   endfunction
        

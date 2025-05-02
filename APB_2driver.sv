@@ -37,9 +37,9 @@ class APB_2driver extends uvm_driver#(APB_2sequence_item);
       vif.APB_2driver_cb.apb_write_paddr <= req.apb_write_paddr;
       vif.APB_2driver_cb.apb_write_data <= req.apb_write_data;
       vif.APB_2driver_cb.apb_read_paddr <= req.apb_read_paddr;
-      `uvm_info("driver", $sformatf("----Driver----"), UVM_LOW);
+      `uvm_info("driver", $sformatf("----Start of Driver----"), UVM_LOW);
       req.print();
-      `uvm_info("driver", $sformatf("----Driver----"), UVM_LOW); 
+      `uvm_info("driver", $sformatf("----End of Driver----"), UVM_LOW); 
  end
   endtask
 endclass

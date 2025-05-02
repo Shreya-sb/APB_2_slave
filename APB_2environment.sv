@@ -30,7 +30,7 @@ class APB_2environment extends uvm_env;
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);    
     active_agent.APB_2mon_1.item_collect_port.connect(scoreboard.item_collect1_export);
-    active_agent.APB_2dri.item_collect_port.connect(coverage.cov_in_export);
+    active_agent.APB_2mon_1.item_collect_port.connect(coverage.cov_in_export);
     passive_agent.APB_2mon_2.item_collect_port2.connect(scoreboard.item_collect2_export);
     passive_agent.APB_2mon_2.item_collect_port2.connect(coverage.cov_out_export);
   endfunction

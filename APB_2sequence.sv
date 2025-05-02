@@ -33,7 +33,7 @@ class APB_2writeSequence_0 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-      `uvm_do_with(item,{transfer==1; READ_WRITE==1; apb_write_paddr[8]==0;}) 
+      `uvm_do_with(item,{transfer==1; READ_WRITE==0; apb_write_paddr[8]==0;}) 
   endtask
 endclass:APB_2writeSequence_0
 
@@ -49,7 +49,7 @@ class APB_2writeSequence_1 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-      `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==1;}) 
+      `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;}) 
   endtask
 endclass:APB_2writeSequence_1
 
@@ -65,7 +65,7 @@ class APB_2readSequence_0 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-      `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==0;}) 
+      `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
   endtask
 endclass:APB_2readSequence_0
 
@@ -81,6 +81,6 @@ class APB_2readSequence_1 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-      `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==0;}) 
+      `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
   endtask
 endclass:APB_2readSequence_1

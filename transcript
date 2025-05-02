@@ -1,6 +1,7 @@
 # vsim -c top 
-# Start time: 13:41:06 on Apr 25,2025
-# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Start time: 18:34:54 on May 02,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: APB_2sequence.sv(17): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
 # //  Questa Sim
 # //  Version 10.6c linux Jul 25 2017
 # //
@@ -56,11 +57,10 @@
 #   env                       APB_2environment               -     @478 
 #     active_agent            APB_2active_agent              -     @485 
 #       APB_2dri              APB_2driver                    -     @647 
-#         item_collect_port   uvm_analysis_port              -     @670 
 #         rsp_port            uvm_analysis_port              -     @662 
 #         seq_item_port       uvm_seq_item_pull_port         -     @654 
-#       APB_2mon_1            APB_2monitor_1                 -     @678 
-#         item_collect_port   uvm_analysis_port              -     @686 
+#       APB_2mon_1            APB_2monitor_1                 -     @670 
+#         item_collect_port   uvm_analysis_port              -     @678 
 #       APB_2seqr             APB_2sequencer                 -     @538 
 #         rsp_export          uvm_analysis_export            -     @545 
 #         seq_item_export     uvm_seq_item_pull_imp          -     @639 
@@ -73,19 +73,19 @@
 #       cov_in_export         uvm_analysis_imp_inputport     -     @514 
 #       cov_out_export        uvm_analysis_imp_outputport    -     @522 
 #     passive_agent           APB_2passive_agent             -     @530 
-#       APB_2mon_2            APB_2monitor_2                 -     @701 
-#         item_collect_port2  uvm_analysis_port              -     @708 
+#       APB_2mon_2            APB_2monitor_2                 -     @693 
+#         item_collect_port2  uvm_analysis_port              -     @700 
 #     scoreboard              APB_2scoreboard                -     @492 
-#       item_collect1_export  uvm_analysis_imp_monitor1port  -     @717 
-#       item_collect2_export  uvm_analysis_imp_monitor2port  -     @725 
+#       item_collect1_export  uvm_analysis_imp_monitor1port  -     @709 
+#       item_collect2_export  uvm_analysis_imp_monitor2port  -     @717 
 # ----------------------------------------------------------------------
-# UVM_INFO APB_2driver.sv(42) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----Driver----
+# UVM_INFO APB_2driver.sv(40) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----Start of Driver----
 # ----------------------------------------------------------------------------------------------------
 # Name                           Type                Size  Value                                      
 # ----------------------------------------------------------------------------------------------------
-# item                           APB_2sequence_item  -     @745                                       
+# item                           APB_2sequence_item  -     @737                                       
 #   transfer                     integral            1     'h1                                        
-#   READ_WRITE                   integral            1     'h1                                        
+#   READ_WRITE                   integral            1     'h0                                        
 #   apb_write_paddr              integral            9     'h57                                       
 #   apb_write_data               integral            8     'h94                                       
 #   apb_read_paddr               integral            9     'h1c9                                      
@@ -96,36 +96,36 @@
 #   parent sequence (full name)  string              43    uvm_test_top.env.active_agent.APB_2seqr.seq
 #   sequencer                    string              39    uvm_test_top.env.active_agent.APB_2seqr    
 # ----------------------------------------------------------------------------------------------------
-# UVM_INFO APB_2driver.sv(44) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----Driver----
+# UVM_INFO APB_2driver.sv(42) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----End of Driver----
 # Entered monitor2 write
-# UVM_INFO APB_2monitor_2.sv(50) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=87,apb_write_data=148,apb_read_paddr=457,apb_read_data_out=0
+# UVM_INFO APB_2monitor_2.sv(50) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_2] transfer=1 READ_WRITE=0 apb_write_paddr=87,apb_write_data=148,apb_read_paddr=457,apb_read_data_out=0
 # Entered monitor1 write
-# UVM_INFO APB_2monitor_1.sv(48) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr= 87,apb_write_data=148,apb_read_paddr=457
+# UVM_INFO APB_2monitor_1.sv(48) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=0 apb_write_paddr= 87,apb_write_data=148,apb_read_paddr=457
 # ----------------------------------------------------
 # Name                 Type                Size  Value
 # ----------------------------------------------------
-# APB_2mon_item        APB_2sequence_item  -     @773 
+# APB_2mon_item        APB_2sequence_item  -     @765 
 #   transfer           integral            1     'h1  
-#   READ_WRITE         integral            1     'h1  
+#   READ_WRITE         integral            1     'h0  
 #   apb_write_paddr    integral            9     'h57 
 #   apb_write_data     integral            8     'h94 
 #   apb_read_paddr     integral            9     'h1c9
 #   apb_read_data_out  integral            8     'h0  
 # ----------------------------------------------------
-# UVM_INFO APB_2scoreboard.sv(63) @ 15: uvm_test_top.env.scoreboard [READ AND WRITE Match] 
+# UVM_INFO APB_2scoreboard.sv(79) @ 15: uvm_test_top.env.scoreboard [ WRITE Match] 
 # ----------------------------------------------------
 # Name                 Type                Size  Value
 # ----------------------------------------------------
-# APB_2mon_item        APB_2sequence_item  -     @778 
+# APB_2mon_item        APB_2sequence_item  -     @770 
 #   transfer           integral            1     'h1  
-#   READ_WRITE         integral            1     'h1  
+#   READ_WRITE         integral            1     'h0  
 #   apb_write_paddr    integral            9     'h57 
 #   apb_write_data     integral            8     'h94 
 #   apb_read_paddr     integral            9     'h1c9
 #   apb_read_data_out  integral            8     'h0  
 # ----------------------------------------------------
 # UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 35: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO APB_2coverage.sv(99) @ 35: uvm_test_top.env.coverage [APB_2coverage] Input Coverage is 0.000000 
+# UVM_INFO APB_2coverage.sv(99) @ 35: uvm_test_top.env.coverage [APB_2coverage] Input Coverage is 71.428571 
 # Output Coverage is 100.000000
 # UVM_INFO APB_2test.sv(36) @ 35: uvm_test_top [APB_2write_test] ----------------
 # UVM_INFO APB_2test.sv(37) @ 35: uvm_test_top [APB_2write_test] --  TEST PASS --
@@ -139,15 +139,16 @@
 # UVM_ERROR :    0
 # UVM_FATAL :    0
 # ** Report counts by id
+# [ WRITE Match]     1
 # [APB_2coverage]     1
 # [APB_2write_test]     3
-# [MONITOR_1]     2
+# [MONITOR_1]     1
+# [MONITOR_2]     1
 # [Questa UVM]     2
-# [READ AND WRITE Match]     1
 # [RNTST]     1
 # [TEST_DONE]     1
 # [driver]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 35 ns  Iteration: 53  Instance: /top
-# End time: 13:41:33 on Apr 25,2025, Elapsed time: 0:00:27
-# Errors: 2, Warnings: 0
+# End time: 18:35:01 on May 02,2025, Elapsed time: 0:00:07
+# Errors: 2, Warnings: 1
