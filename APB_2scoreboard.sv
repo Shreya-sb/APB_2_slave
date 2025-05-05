@@ -26,7 +26,10 @@ class APB_2scoreboard extends uvm_scoreboard;
   APB_2sequence_item monitor2_trans;
   
     bit [7:0] mem_model[0:255];
-  
+ 
+  int match;
+  int  mismatch;  
+ 
   //Define a new constructor method
   function new(string name = "APB_2scoreboard", uvm_component parent = null);
     super.new(name, parent);
@@ -62,7 +65,7 @@ class APB_2scoreboard extends uvm_scoreboard;
     if( monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out && monitor1_trans.apb_read_paddr == monitor2_trans.apb_read_paddr)
       begin
         monitor1_trans.print();
-        `uvm_info("READ  Match","",UVM_LOW)
+        `uvm_info("Match","",UVM_LOW)
         monitor2_trans.print();
       end
     else begin

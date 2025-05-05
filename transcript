@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 13:01:40 on May 05,2025
+# Start time: 16:47:42 on May 05,2025
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: APB_2sequence.sv(17): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
 # //  Questa Sim
@@ -110,7 +110,7 @@
 #   apb_read_paddr     integral            9     'h1c9
 #   apb_read_data_out  integral            8     'h0xx
 # ----------------------------------------------------
-# UVM_ERROR APB_2scoreboard.sv(70) @ 15: uvm_test_top.env.scoreboard [READ Mismatch] 
+# UVM_ERROR APB_2scoreboard.sv(73) @ 15: uvm_test_top.env.scoreboard [READ Mismatch] 
 # ----------------------------------------------------
 # Name                 Type                Size  Value
 # ----------------------------------------------------
@@ -148,5 +148,5 @@
 # [driver]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 35 ns  Iteration: 53  Instance: /top
-# End time: 13:01:49 on May 05,2025, Elapsed time: 0:00:09
+# End time: 16:47:49 on May 05,2025, Elapsed time: 0:00:07
 # Errors: 0, Warnings: 1

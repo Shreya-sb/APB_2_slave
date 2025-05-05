@@ -1,6 +1,7 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 `include "APB_2package.sv" 
+`include "apbtop.v"
 
 module top;
   bit pclk;

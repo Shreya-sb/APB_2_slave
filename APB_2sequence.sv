@@ -33,7 +33,9 @@ class APB_2writeSequence_0 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-    `uvm_do_with(item,{transfer==0; READ_WRITE==0; apb_write_paddr[8]==0;}) 
+   repeat(5) begin
+    `uvm_do_with(item,{transfer==1; READ_WRITE==0; apb_write_paddr[8]==0;}) 
+   end
   endtask
 endclass:APB_2writeSequence_0
 
@@ -48,9 +50,11 @@ class APB_2writeSequence_1 extends APB_2sequence;
   endfunction
   
   virtual task body();
+repeat(5) begin
       item = APB_2sequence_item::type_id::create("item");
-    `uvm_do_with(item,{transfer==0;READ_WRITE==0;apb_write_paddr[8]==1;}) 
-  endtask
+    `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;}) 
+ end
+ endtask
 endclass:APB_2writeSequence_1
 
 //read sequence for slave 0
@@ -65,7 +69,7 @@ class APB_2readSequence_0 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-    `uvm_do_with(item,{transfer==0;READ_WRITE==1;apb_write_paddr[8]==0;}) 
+    `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
   endtask
 endclass:APB_2readSequence_0
 
@@ -81,7 +85,7 @@ class APB_2readSequence_1 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-    `uvm_do_with(item,{transfer==0;READ_WRITE==1;apb_write_paddr[8]==0;}) 
+    `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
   endtask
 endclass:APB_2readSequence_1
 
@@ -103,7 +107,7 @@ class APB_2writereadSequence_0 extends APB_2sequence;
     
     // First randomize and send write item
     `uvm_do_with(w_item, {
-        transfer == 0;
+        transfer == 1;
         READ_WRITE == 0;
         apb_write_paddr[8] == 0;
     })
@@ -111,7 +115,7 @@ class APB_2writereadSequence_0 extends APB_2sequence;
    
   // Then send read item with the same address
     `uvm_do_with(r_item, {
-        transfer == 0;
+        transfer == 1;
         READ_WRITE == 1;
         apb_read_paddr == w_item.apb_write_paddr;
     })
@@ -134,7 +138,7 @@ class APB_2writereadSequence_1 extends APB_2sequence;
     
     // First randomize and send write item
     `uvm_do_with(w_item, {
-        transfer == 0;
+        transfer == 1;
         READ_WRITE == 0;
         apb_write_paddr[8] == 1;
     })
@@ -142,7 +146,7 @@ class APB_2writereadSequence_1 extends APB_2sequence;
    
   // Then send read item with the same address
     `uvm_do_with(r_item, {
-        transfer == 0;
+        transfer == 1;
         READ_WRITE == 1;
         apb_read_paddr == w_item.apb_write_paddr;
     })
