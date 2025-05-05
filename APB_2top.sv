@@ -25,7 +25,7 @@ module top;
   end
  
   initial begin
-    run_test("APB_2write_test");
+    run_test("APB_2readSlave0_test");
   end
  
 endmodule

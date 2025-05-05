@@ -1,5 +1,3 @@
-
-
 class APB_2test extends uvm_test;
   `uvm_component_utils(APB_2test)
  
@@ -40,12 +38,12 @@ class APB_2test extends uvm_test;
 endfunction
 endclass
 
-class APB_2write_test extends APB_2test;
+class APB_2writeSlave0_test extends APB_2test;
 
-  `uvm_component_utils(APB_2write_test)
+  `uvm_component_utils(APB_2writeSlave0_test)
 
 //Constructor
-  function new(string name = "APB_2write_test",uvm_component parent);
+  function new(string name = "APB_2writeSlave0_test",uvm_component parent);
     super.new(name,parent);
   endfunction
 
@@ -64,6 +62,157 @@ class APB_2write_test extends APB_2test;
     APB_2writeSequence_0 seq;
     phase.raise_objection(this);
     seq = APB_2writeSequence_0::type_id::create("seq");
+    seq.start(env.active_agent.APB_2seqr);
+    phase.drop_objection(this);
+    phase.phase_done.set_drain_time(this,30); 
+  endtask 
+endclass
+
+class APB_2writeSlave1_test extends APB_2test;
+
+  `uvm_component_utils(APB_2writeSlave1_test)
+
+//Constructor
+  function new(string name = "APB_2writeSlave1_test",uvm_component parent);
+    super.new(name,parent);
+  endfunction
+
+ //connect phase 
+ virtual function void connect_phase(uvm_phase phase);
+   super.connect_phase(phase);
+ endfunction
+
+ //end_of_elaboration phase
+  virtual function void end_of_elaboration();
+    print();
+  endfunction
+ 
+ //run phase 
+  virtual task run_phase(uvm_phase phase);
+    APB_2writeSequence_1 seq;
+    phase.raise_objection(this);
+    seq = APB_2writeSequence_1::type_id::create("seq");
+    seq.start(env.active_agent.APB_2seqr);
+    phase.drop_objection(this);
+    phase.phase_done.set_drain_time(this,30); 
+  endtask 
+endclass
+
+class APB_2readSlave0_test extends APB_2test;
+
+  `uvm_component_utils(APB_2readSlave0_test)
+
+//Constructor
+  function new(string name = "APB_2readSlave0_test",uvm_component parent);
+    super.new(name,parent);
+  endfunction
+
+ //connect phase 
+ virtual function void connect_phase(uvm_phase phase);
+   super.connect_phase(phase);
+ endfunction
+
+ //end_of_elaboration phase
+  virtual function void end_of_elaboration();
+    print();
+  endfunction
+ 
+ //run phase 
+  virtual task run_phase(uvm_phase phase);
+    APB_2readSequence_0 seq;
+    phase.raise_objection(this);
+    seq = APB_2readSequence_0::type_id::create("seq");
+    seq.start(env.active_agent.APB_2seqr);
+    phase.drop_objection(this);
+    phase.phase_done.set_drain_time(this,30); 
+  endtask 
+endclass
+
+class APB_2readSlave1_test extends APB_2test;
+
+  `uvm_component_utils(APB_2readSlave1_test)
+
+//Constructor
+  function new(string name = "APB_2readSlave1_test",uvm_component parent);
+    super.new(name,parent);
+  endfunction
+
+ //connect phase 
+ virtual function void connect_phase(uvm_phase phase);
+   super.connect_phase(phase);
+ endfunction
+
+ //end_of_elaboration phase
+  virtual function void end_of_elaboration();
+    print();
+  endfunction
+ 
+ //run phase 
+  virtual task run_phase(uvm_phase phase);
+    APB_2readSequence_1 seq;
+    phase.raise_objection(this);
+    seq = APB_2readSequence_1::type_id::create("seq");
+    seq.start(env.active_agent.APB_2seqr);
+    phase.drop_objection(this);
+    phase.phase_done.set_drain_time(this,30); 
+  endtask 
+endclass
+
+
+class APB_2writereadSlave0_test extends APB_2test;
+
+  `uvm_component_utils(APB_2writereadSlave0_test)
+
+//Constructor
+  function new(string name = "APB_2writereadSlave0_test",uvm_component parent);
+    super.new(name,parent);
+  endfunction
+
+ //connect phase 
+ virtual function void connect_phase(uvm_phase phase);
+   super.connect_phase(phase);
+ endfunction
+
+ //end_of_elaboration phase
+  virtual function void end_of_elaboration();
+    print();
+  endfunction
+ 
+ //run phase 
+  virtual task run_phase(uvm_phase phase);
+    APB_2writereadSequence_0 seq;
+    phase.raise_objection(this);
+    seq = APB_2writereadSequence_0::type_id::create("seq");
+    seq.start(env.active_agent.APB_2seqr);
+    phase.drop_objection(this);
+    phase.phase_done.set_drain_time(this,30); 
+  endtask 
+endclass
+
+class APB_2writereadSlave1_test extends APB_2test;
+
+  `uvm_component_utils(APB_2writereadSlave1_test)
+
+//Constructor
+  function new(string name = "APB_2writereadSlave1_test",uvm_component parent);
+    super.new(name,parent);
+  endfunction
+
+ //connect phase 
+ virtual function void connect_phase(uvm_phase phase);
+   super.connect_phase(phase);
+ endfunction
+
+ //end_of_elaboration phase
+  virtual function void end_of_elaboration();
+    print();
+  endfunction
+ 
+ //run phase 
+  virtual task run_phase(uvm_phase phase);
+    APB_2writereadSequence_1 seq;
+    phase.raise_objection(this);
+    seq = APB_2writereadSequence_1::type_id::create("seq");
     seq.start(env.active_agent.APB_2seqr);
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this,30); 

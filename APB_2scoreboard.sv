@@ -75,8 +75,12 @@ class APB_2scoreboard extends uvm_scoreboard;
     begin
      if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_write_paddr == monitor2_trans.apb_write_paddr)
       begin
+
+      `uvm_info("MONITOR 1", $sformatf("----Start of MONITOR1----"), UVM_LOW);
         monitor1_trans.print();
         `uvm_info(" WRITE Match","",UVM_LOW)
+      `uvm_info("MONITOR 2", $sformatf("----Start of MONITOR2----"), UVM_LOW);
+
         monitor2_trans.print();
       end
     else begin

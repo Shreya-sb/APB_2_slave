@@ -44,7 +44,8 @@ class APB_2monitor_1 extends uvm_monitor;
       
       // Broadcast the transaction using the analysis port
       item_collect_port.write(APB_2mon_item);
-      
+     $display("----Start of Monitor----");
+ 
       `uvm_info("MONITOR_1",$sformatf("transfer=%d READ_WRITE=%d apb_write_paddr=%d,apb_write_data=%d,apb_read_paddr=%d",APB_2mon_item.transfer,APB_2mon_item.READ_WRITE,APB_2mon_item.apb_write_paddr,APB_2mon_item.apb_write_data,APB_2mon_item.apb_read_paddr),UVM_LOW)
 	  repeat(2)@(vif.APB_2monitor_cb); 
     end

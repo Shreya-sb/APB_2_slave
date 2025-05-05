@@ -42,6 +42,7 @@ class APB_2monitor_2 extends uvm_monitor;
       APB_2mon_item.apb_write_data   = vif.APB_2monitor_cb.apb_write_data;
       APB_2mon_item.apb_read_paddr   = vif.APB_2monitor_cb.apb_read_paddr;
       APB_2mon_item.apb_read_data_out= vif.APB_2monitor_cb.apb_read_data_out;
+      `uvm_info("MONITOR_2", $sformatf("----Start of Monitor_2----"), UVM_LOW);
 
       
       // Broadcast the transaction using the analysis port

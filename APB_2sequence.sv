@@ -84,3 +84,128 @@ class APB_2readSequence_1 extends APB_2sequence;
       `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
   endtask
 endclass:APB_2readSequence_1
+
+
+
+class APB_2writereadSequence_0 extends APB_2sequence;
+  `uvm_object_utils(APB_2writereadSequence_0)
+  
+    APB_2sequence_item w_item;
+    APB_2sequence_item r_item;
+
+  function new(string name = "APB_2writereadSequence_0");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+    w_item = APB_2sequence_item::type_id::create("w_item");
+    r_item = APB_2sequence_item::type_id::create("r_item");
+    
+    // First randomize and send write item
+    `uvm_do_with(w_item, {
+        transfer == 1;
+        READ_WRITE == 0;
+        apb_write_paddr[8] == 0;
+    })
+     w_item.apb_write_paddr.rand_mode(0); 
+   
+  // Then send read item with the same address
+    `uvm_do_with(r_item, {
+        transfer == 1;
+        READ_WRITE == 1;
+        apb_read_paddr == w_item.apb_write_paddr;
+    })
+endtask 
+endclass:APB_2writereadSequence_0
+
+class APB_2writereadSequence_1 extends APB_2sequence;
+  `uvm_object_utils(APB_2writereadSequence_1)
+  
+    APB_2sequence_item w_item;
+    APB_2sequence_item r_item;
+
+  function new(string name = "APB_2writereadSequence_1");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+    w_item = APB_2sequence_item::type_id::create("w_item");
+    r_item = APB_2sequence_item::type_id::create("r_item");
+    
+    // First randomize and send write item
+    `uvm_do_with(w_item, {
+        transfer == 1;
+        READ_WRITE == 0;
+        apb_write_paddr[8] == 1;
+    })
+     w_item.apb_write_paddr.rand_mode(0); 
+   
+  // Then send read item with the same address
+    `uvm_do_with(r_item, {
+        transfer == 1;
+        READ_WRITE == 1;
+        apb_read_paddr == w_item.apb_write_paddr;
+    })
+endtask 
+  endclass:APB_2writereadSequence_1
+
+/*class APB_2writereadSequence_1 extends APB_2sequence;
+  `uvm_object_utils(APB_2writereadSequence_1)
+  
+    APB_2sequence_item w_item;
+    APB_2sequence_item r_item;
+
+  
+  function new(string name = "APB_2writereadSequence_1");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+    w_item = APB_2sequence_item::type_id::create("w_item");
+    r_item = APB_2sequence_item::type_id::create("r_item");
+    `uvm_do_with(w_item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;}) 
+   // w_item.apb_write_paddr.rand_mode(0);
+   // `uvm_do_with(r_item,{transfer==1;READ_WRITE==1;apb_read_paddr == w_item.apb_write_paddr;}) 
+     r_item.transfer = 1;
+    r_item.READ_WRITE = 1;
+    r_item.apb_read_paddr = w_item.apb_write_paddr;
+    r_item.apb_read_paddr.rand_mode(0); // Lock it from being randomized accidentally
+
+    start_item(r_item);
+    finish_item(r_item);
+  endtask
+endclass:APB_2writereadSequence_1
+
+/*class APB_2writereadSequence_1 extends APB_2sequence;
+    `uvm_object_utils(APB_2writereadSequence_1)
+
+    APB_2sequence_item w_item;
+    APB_2sequence_item r_item;
+    bit [31:0] saved_addr; // To store the write address
+
+    function new(string name = "APB_2writereadSequence_1");
+        super.new(name);
+    endfunction
+
+    virtual task body();
+        w_item = APB_2sequence_item::type_id::create("w_item");
+        r_item = APB_2sequence_item::type_id::create("r_item");
+        
+        // First randomize and send write item
+        `uvm_do_with(w_item, {
+            transfer == 1;
+            READ_WRITE == 0;
+            apb_write_paddr[8] == 1;
+        })
+        
+        // Save the write address
+        saved_addr = w_item.apb_write_paddr;
+        
+        // Then send read item with the same address
+        `uvm_do_with(r_item, {
+            transfer == 1;
+            READ_WRITE == 1;
+            apb_read_paddr == saved_addr;
+        })
+    endtask
+endclass: APB_2writereadSequence_1*/

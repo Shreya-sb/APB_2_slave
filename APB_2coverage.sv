@@ -31,13 +31,13 @@ class APB_2coverage extends uvm_subscriber#(APB_2sequence_item);
     
     
     APB_WRITE_SLAVE_SELECT_CP:coverpoint seq_item.apb_write_paddr[8] {
-      bins write_paddr_s0[0] = {1'b0};
-      bins write_paddr_s1[1] = {1'b1};
+      bins write_paddr_s0_0 = {1'b0};
+      bins write_paddr_s1_1 = {1'b1};
     }
     
     APB_READ_SLAVE_SELECT_CP:coverpoint seq_item.apb_read_paddr[8] {
-      bins read_paddr_s0[0] = {1'b0};
-      bins read_paddr_s1[1] = {1'b1};
+      bins read_paddr_s0_0 = {1'b0};
+      bins read_paddr_s1_1 = {1'b1};
     }
     
     APB_WRITE_DATA_CP:coverpoint seq_item.apb_write_data {

@@ -1,5 +1,5 @@
 # vsim -c top 
-# Start time: 18:34:54 on May 02,2025
+# Start time: 13:01:40 on May 05,2025
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: APB_2sequence.sv(17): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
 # //  Questa Sim
@@ -45,15 +45,11 @@
 # 
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# UVM_INFO @ 0: reporter [RNTST] Running test APB_2write_test...
-# ** Error: (vsim-8545) The size is zero/negative for fixed-size array bin 'write_paddr_s0' in Coverpoint 'APB_WRITE_SLAVE_SELECT_CP' of Covergroup instance '\/APB_2top_sv_unit::APB_2coverage::input_cg '. Skipping bin creation.
-#    Time: 0 ns  Iteration: 7  Region: /uvm_pkg::uvm_phase::m_run_phases
-# ** Error: (vsim-8545) The size is zero/negative for fixed-size array bin 'read_paddr_s0' in Coverpoint 'APB_READ_SLAVE_SELECT_CP' of Covergroup instance '\/APB_2top_sv_unit::APB_2coverage::input_cg '. Skipping bin creation.
-#    Time: 0 ns  Iteration: 7  Region: /uvm_pkg::uvm_phase::m_run_phases
+# UVM_INFO @ 0: reporter [RNTST] Running test APB_2readSlave0_test...
 # ----------------------------------------------------------------------
 # Name                        Type                           Size  Value
 # ----------------------------------------------------------------------
-# uvm_test_top                APB_2write_test                -     @471 
+# uvm_test_top                APB_2readSlave0_test           -     @471 
 #   env                       APB_2environment               -     @478 
 #     active_agent            APB_2active_agent              -     @485 
 #       APB_2dri              APB_2driver                    -     @647 
@@ -85,11 +81,11 @@
 # ----------------------------------------------------------------------------------------------------
 # item                           APB_2sequence_item  -     @737                                       
 #   transfer                     integral            1     'h1                                        
-#   READ_WRITE                   integral            1     'h0                                        
-#   apb_write_paddr              integral            9     'h57                                       
+#   READ_WRITE                   integral            1     'h1                                        
+#   apb_write_paddr              integral            9     'hea                                       
 #   apb_write_data               integral            8     'h94                                       
 #   apb_read_paddr               integral            9     'h1c9                                      
-#   apb_read_data_out            integral            8     'h0                                        
+#   apb_read_data_out            integral            8     'h0xx                                      
 #   begin_time                   time                64    0                                          
 #   depth                        int                 32    'd2                                        
 #   parent sequence (name)       string              3     seq                                        
@@ -97,58 +93,60 @@
 #   sequencer                    string              39    uvm_test_top.env.active_agent.APB_2seqr    
 # ----------------------------------------------------------------------------------------------------
 # UVM_INFO APB_2driver.sv(42) @ 5: uvm_test_top.env.active_agent.APB_2dri [driver] ----End of Driver----
+# UVM_INFO APB_2monitor_2.sv(45) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_2] ----Start of Monitor_2----
 # Entered monitor2 write
-# UVM_INFO APB_2monitor_2.sv(50) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_2] transfer=1 READ_WRITE=0 apb_write_paddr=87,apb_write_data=148,apb_read_paddr=457,apb_read_data_out=0
+# UVM_INFO APB_2monitor_2.sv(51) @ 15: uvm_test_top.env.passive_agent.APB_2mon_2 [MONITOR_2] transfer=1 READ_WRITE=1 apb_write_paddr=234,apb_write_data=148,apb_read_paddr=457,apb_read_data_out=x
 # Entered monitor1 write
-# UVM_INFO APB_2monitor_1.sv(48) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=0 apb_write_paddr= 87,apb_write_data=148,apb_read_paddr=457
+# ----Start of Monitor----
+# UVM_INFO APB_2monitor_1.sv(49) @ 15: uvm_test_top.env.active_agent.APB_2mon_1 [MONITOR_1] transfer=1 READ_WRITE=1 apb_write_paddr=234,apb_write_data=148,apb_read_paddr=457
 # ----------------------------------------------------
 # Name                 Type                Size  Value
 # ----------------------------------------------------
 # APB_2mon_item        APB_2sequence_item  -     @765 
 #   transfer           integral            1     'h1  
-#   READ_WRITE         integral            1     'h0  
-#   apb_write_paddr    integral            9     'h57 
+#   READ_WRITE         integral            1     'h1  
+#   apb_write_paddr    integral            9     'hea 
 #   apb_write_data     integral            8     'h94 
 #   apb_read_paddr     integral            9     'h1c9
-#   apb_read_data_out  integral            8     'h0  
+#   apb_read_data_out  integral            8     'h0xx
 # ----------------------------------------------------
-# UVM_INFO APB_2scoreboard.sv(79) @ 15: uvm_test_top.env.scoreboard [ WRITE Match] 
+# UVM_ERROR APB_2scoreboard.sv(70) @ 15: uvm_test_top.env.scoreboard [READ Mismatch] 
 # ----------------------------------------------------
 # Name                 Type                Size  Value
 # ----------------------------------------------------
 # APB_2mon_item        APB_2sequence_item  -     @770 
 #   transfer           integral            1     'h1  
-#   READ_WRITE         integral            1     'h0  
-#   apb_write_paddr    integral            9     'h57 
+#   READ_WRITE         integral            1     'h1  
+#   apb_write_paddr    integral            9     'hea 
 #   apb_write_data     integral            8     'h94 
 #   apb_read_paddr     integral            9     'h1c9
-#   apb_read_data_out  integral            8     'h0  
+#   apb_read_data_out  integral            8     'h0xx
 # ----------------------------------------------------
 # UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 35: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
 # UVM_INFO APB_2coverage.sv(99) @ 35: uvm_test_top.env.coverage [APB_2coverage] Input Coverage is 71.428571 
-# Output Coverage is 100.000000
-# UVM_INFO APB_2test.sv(36) @ 35: uvm_test_top [APB_2write_test] ----------------
-# UVM_INFO APB_2test.sv(37) @ 35: uvm_test_top [APB_2write_test] --  TEST PASS --
-# UVM_INFO APB_2test.sv(38) @ 35: uvm_test_top [APB_2write_test] ----------------
+# Output Coverage is 33.333333
+# UVM_INFO APB_2test.sv(29) @ 35: uvm_test_top [APB_2readSlave0_test] ------------------
+# UVM_INFO APB_2test.sv(30) @ 35: uvm_test_top [APB_2readSlave0_test] --   TEST FAIL  --
+# UVM_INFO APB_2test.sv(31) @ 35: uvm_test_top [APB_2readSlave0_test] ------------------
 # 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
 # UVM_INFO :   13
 # UVM_WARNING :    0
-# UVM_ERROR :    0
+# UVM_ERROR :    1
 # UVM_FATAL :    0
 # ** Report counts by id
-# [ WRITE Match]     1
 # [APB_2coverage]     1
-# [APB_2write_test]     3
+# [APB_2readSlave0_test]     3
 # [MONITOR_1]     1
-# [MONITOR_2]     1
+# [MONITOR_2]     2
 # [Questa UVM]     2
+# [READ Mismatch]     1
 # [RNTST]     1
 # [TEST_DONE]     1
 # [driver]     2
 # ** Note: $finish    : /tools/mentor/questasim_10.6c/questasim/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 35 ns  Iteration: 53  Instance: /top
-# End time: 18:35:01 on May 02,2025, Elapsed time: 0:00:07
-# Errors: 2, Warnings: 1
+# End time: 13:01:49 on May 05,2025, Elapsed time: 0:00:09
+# Errors: 0, Warnings: 1
