@@ -105,13 +105,15 @@ begin
       begin
         match++;
         monitor1_trans.print();
-        `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
+        `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW);
+        `uvm_info("compare",$sformatf("-------------------Test PASS---------------------\n"),UVM_LOW);
         monitor2_trans.print();
       end
     else begin
       mismatch++;
       monitor1_trans.print();
-      `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW)
+      `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW);
+      `uvm_info("compare",$sformatf("--------------------Test FAIL----------------------\n"),UVM_LOW);
       monitor2_trans.print();
     end
    end
@@ -120,11 +122,11 @@ begin
      if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_write_paddr == monitor2_trans.apb_write_paddr)
       begin
         match++;
-
-      `uvm_info("MONITOR 1", $sformatf("----Start of MONITOR1----"), UVM_LOW);
+      //`uvm_info("MONITOR 1", $sformatf("----Start of MONITOR1----"), UVM_LOW);
         monitor1_trans.print();
-        `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
-      `uvm_info("MONITOR 2", $sformatf("----Start of MONITOR2----"), UVM_LOW);
+      `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
+      `uvm_info("compare",$sformatf("-------------------Test PASS---------------------\n"),UVM_LOW)
+      //`uvm_info("MONITOR 2", $sformatf("----Start of MONITOR2----"), UVM_LOW);
 
         monitor2_trans.print();
       end
@@ -132,6 +134,7 @@ begin
       mismatch++;
       monitor1_trans.print();
       `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW)
+      `uvm_info("compare",$sformatf("-------------------Test FAIL---------------------\n"),UVM_LOW)
       monitor2_trans.print();
     end
 

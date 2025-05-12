@@ -21,14 +21,16 @@ class APB_2test extends uvm_test;
     print();
   endfunction
 
-   int mismatch_count = APB_2scoreboard.mismatch_count; // Replace with actual path
+   //int mismatch_count = APB_2scoreboard.mismatch_count; // Replace with actual path
 
  
-  function void report_phase(uvm_phase phase);
+ /* function void report_phase(uvm_phase phase);
     uvm_report_server svr;
     super.report_phase(phase);
     svr = uvm_report_server::get_server();
-    if(svr.get_severity_count(UVM_FATAL)+svr.get_severity_count(UVM_ERROR)>0 || mismatch_count >0)begin
+    
+  //
+    if(svr.get_severity_count(UVM_FATAL)+svr.get_severity_count(UVM_ERROR)>0 +  svr.get_id_count("[Mismatch]") > 0)begin
      `uvm_info(get_type_name(), "------------------", UVM_NONE)
      `uvm_info(get_type_name(), "--   TEST FAIL  --", UVM_NONE)
      `uvm_info(get_type_name(), "------------------", UVM_NONE)
@@ -38,7 +40,7 @@ class APB_2test extends uvm_test;
      `uvm_info(get_type_name(), "--  TEST PASS --", UVM_NONE)
      `uvm_info(get_type_name(), "----------------", UVM_NONE)
    end
-endfunction
+endfunction*/
 endclass
 
 class APB_2writeSlave0_test extends APB_2test;
