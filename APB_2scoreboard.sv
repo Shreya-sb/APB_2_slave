@@ -59,7 +59,7 @@ class APB_2scoreboard extends uvm_scoreboard;
   endfunction
   
     // Comparison logic
-  function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item output_trans);
+/*  function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item output_trans);
    if(monitor1_trans.READ_WRITE)
    begin
     if( monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out && monitor1_trans.apb_read_paddr == monitor2_trans.apb_read_paddr)
@@ -94,7 +94,51 @@ class APB_2scoreboard extends uvm_scoreboard;
 
     end
   endfunction
-       
+  */
+
+function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item output_trans);
+ if(monitor1_trans.transfer)
+begin  
+  if(monitor1_trans.READ_WRITE)
+   begin
+    if( monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out && monitor1_trans.apb_read_paddr == monitor2_trans.apb_read_paddr)
+      begin
+        match++;
+        monitor1_trans.print();
+        `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
+        monitor2_trans.print();
+      end
+    else begin
+      mismatch++;
+      monitor1_trans.print();
+      `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW)
+      monitor2_trans.print();
+    end
+   end
+   else
+    begin
+     if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_write_paddr == monitor2_trans.apb_write_paddr)
+      begin
+        match++;
+
+      `uvm_info("MONITOR 1", $sformatf("----Start of MONITOR1----"), UVM_LOW);
+        monitor1_trans.print();
+        `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
+      `uvm_info("MONITOR 2", $sformatf("----Start of MONITOR2----"), UVM_LOW);
+
+        monitor2_trans.print();
+      end
+    else begin
+      mismatch++;
+      monitor1_trans.print();
+      `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW)
+      monitor2_trans.print();
+    end
+
+    end
+  end
+  endfunction
+     
     // Main run phase
   task run_phase (uvm_phase phase);
     forever begin

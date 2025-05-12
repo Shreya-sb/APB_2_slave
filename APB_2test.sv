@@ -20,12 +20,15 @@ class APB_2test extends uvm_test;
   virtual function void end_of_elaboration();
     print();
   endfunction
+
+   int mismatch_count = APB_2scoreboard.mismatch_count; // Replace with actual path
+
  
   function void report_phase(uvm_phase phase);
     uvm_report_server svr;
     super.report_phase(phase);
     svr = uvm_report_server::get_server();
-    if(svr.get_severity_count(UVM_FATAL)+svr.get_severity_count(UVM_ERROR)>0)begin
+    if(svr.get_severity_count(UVM_FATAL)+svr.get_severity_count(UVM_ERROR)>0 || mismatch_count >0)begin
      `uvm_info(get_type_name(), "------------------", UVM_NONE)
      `uvm_info(get_type_name(), "--   TEST FAIL  --", UVM_NONE)
      `uvm_info(get_type_name(), "------------------", UVM_NONE)
@@ -122,7 +125,9 @@ class APB_2readSlave0_test extends APB_2test;
     APB_2readSequence_0 seq;
     phase.raise_objection(this);
     seq = APB_2readSequence_0::type_id::create("seq");
+    repeat(50)begin
     seq.start(env.active_agent.APB_2seqr);
+    end
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this,30); 
   endtask 
