@@ -35,6 +35,7 @@ class APB_2writeSequence_0 extends APB_2sequence;
       item = APB_2sequence_item::type_id::create("item");
    repeat(5) begin
     `uvm_do_with(item,{transfer==1; READ_WRITE==0; apb_write_paddr[8]==0;}) 
+     `uvm_send(item);
    end
   endtask
 endclass:APB_2writeSequence_0
@@ -50,9 +51,10 @@ class APB_2writeSequence_1 extends APB_2sequence;
   endfunction
   
   virtual task body();
-repeat(5) begin
-      item = APB_2sequence_item::type_id::create("item");
-    `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;}) 
+          item = APB_2sequence_item::type_id::create("item");
+    repeat(5) begin
+    `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;})
+      `uvm_send(item);
  end
  endtask
 endclass:APB_2writeSequence_1
@@ -69,7 +71,10 @@ class APB_2readSequence_0 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
+        repeat(5) begin
     `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
+                `uvm_send(item);
+        end
   endtask
 endclass:APB_2readSequence_0
 
@@ -85,7 +90,10 @@ class APB_2readSequence_1 extends APB_2sequence;
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-    `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
+        repeat(5) begin
+          `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==1;})
+          `uvm_send(item);
+        end
   endtask
 endclass:APB_2readSequence_1
 
@@ -94,64 +102,74 @@ endclass:APB_2readSequence_1
 class APB_2writereadSequence_0 extends APB_2sequence;
   `uvm_object_utils(APB_2writereadSequence_0)
   
-    APB_2sequence_item w_item;
-    APB_2sequence_item r_item;
-
+    APB_2sequence_item item;
+  bit [8:0] w_addr;
+  
   function new(string name = "APB_2writereadSequence_0");
     super.new(name);
   endfunction
   
   virtual task body();
-    w_item = APB_2sequence_item::type_id::create("w_item");
-    r_item = APB_2sequence_item::type_id::create("r_item");
-    
+    item = APB_2sequence_item::type_id::create("item");
+    //r_item = APB_2sequence_item::type_id::create("r_item");
+    repeat(5)begin
     // First randomize and send write item
-    `uvm_do_with(w_item, {
+    `uvm_do_with(item, {
         transfer == 1;
         READ_WRITE == 0;
         apb_write_paddr[8] == 0;
     })
-     w_item.apb_write_paddr.rand_mode(0); 
+      `uvm_send(item);
+      w_addr = item.apb_write_paddr;
+      
+     //w_item.apb_write_paddr.rand_mode(0); 
    
   // Then send read item with the same address
-    `uvm_do_with(r_item, {
+    `uvm_do_with(item, {
         transfer == 1;
         READ_WRITE == 1;
-        apb_read_paddr == w_item.apb_write_paddr;
+        apb_read_paddr == w_addr;
     })
+            `uvm_send(item);
+    end
 endtask 
 endclass:APB_2writereadSequence_0
 
 class APB_2writereadSequence_1 extends APB_2sequence;
   `uvm_object_utils(APB_2writereadSequence_1)
   
-    APB_2sequence_item w_item;
-    APB_2sequence_item r_item;
-
+    APB_2sequence_item item;
+  bit [8:0] w_addr;
+  
   function new(string name = "APB_2writereadSequence_1");
     super.new(name);
   endfunction
   
   virtual task body();
-    w_item = APB_2sequence_item::type_id::create("w_item");
-    r_item = APB_2sequence_item::type_id::create("r_item");
-    
+    item = APB_2sequence_item::type_id::create("item");
+    //r_item = APB_2sequence_item::type_id::create("r_item");
+    repeat(5)begin
     // First randomize and send write item
-    `uvm_do_with(w_item, {
+    `uvm_do_with(item, {
         transfer == 1;
         READ_WRITE == 0;
-        apb_write_paddr[8] == 1;
+      apb_write_paddr[8] == 1;
     })
-     w_item.apb_write_paddr.rand_mode(0); 
+      `uvm_send(item);
+      w_addr = item.apb_write_paddr;
+      
+     //w_item.apb_write_paddr.rand_mode(0); 
    
   // Then send read item with the same address
-    `uvm_do_with(r_item, {
+    `uvm_do_with(item, {
         transfer == 1;
         READ_WRITE == 1;
-        apb_read_paddr == w_item.apb_write_paddr;
+        apb_read_paddr == w_addr;
     })
+            `uvm_send(item);
+    end
 endtask 
-  endclass:APB_2writereadSequence_1
+endclass:APB_2writereadSequence_1
 
 /*class APB_2writereadSequence_1 extends APB_2sequence;
   `uvm_object_utils(APB_2writereadSequence_1)
