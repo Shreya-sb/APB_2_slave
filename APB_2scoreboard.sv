@@ -27,8 +27,8 @@ class APB_2scoreboard extends uvm_scoreboard;
   
     bit [7:0] mem_model[0:255];
  
-  int match;
-  int  mismatch;  
+  int match = 0;
+  int  mismatch = 0;  
  
   //Define a new constructor method
   function new(string name = "APB_2scoreboard", uvm_component parent = null);
@@ -97,24 +97,25 @@ class APB_2scoreboard extends uvm_scoreboard;
   */
 
 function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item output_trans);
- if(monitor1_trans.transfer)
-begin  
+ // if(monitor1_trans.transfer)
+// begin  
   if(monitor1_trans.READ_WRITE)
    begin
     if( monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out && monitor1_trans.apb_read_paddr == monitor2_trans.apb_read_paddr)
       begin
         match++;
-        monitor1_trans.print();
         `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW);
-        `uvm_info("compare",$sformatf("-------------------Test PASS---------------------\n"),UVM_LOW);
-        monitor2_trans.print();
+        `uvm_info("COMPARE", $sformatf("READ PASS | EXPECTED RDATA = %0h  ACTUAL RDATA =%0h |EXPECTED  READ ADDR = %0h ACTUAL READ ADDR =%0h",
+                    monitor1_trans.apb_read_data_out,monitor2_trans.apb_read_data_out,monitor1_trans.apb_read_paddr,monitor2_trans.apb_read_paddr ), UVM_LOW)
+        $display("-------------------Test PASS---------------------\n");
       end
     else begin
       mismatch++;
       monitor1_trans.print();
       `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW);
-      `uvm_info("compare",$sformatf("--------------------Test FAIL----------------------\n"),UVM_LOW);
-      monitor2_trans.print();
+      `uvm_error("COMPARE", $sformatf("READ PASS | EXPECTED RDATA = %0h  ACTUAL RDATA =%0h |EXPECTED  READ ADDR = %0h ACTUAL READ ADDR =%0h",
+                    monitor1_trans.apb_read_data_out,monitor2_trans.apb_read_data_out,monitor1_trans.apb_read_paddr,monitor2_trans.apb_read_paddr ), UVM_LOW)
+      $display("-------------------Test FAIL---------------------\n");
     end
    end
    else
@@ -122,20 +123,17 @@ begin
      if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_write_paddr == monitor2_trans.apb_write_paddr)
       begin
         match++;
-      //`uvm_info("MONITOR 1", $sformatf("----Start of MONITOR1----"), UVM_LOW);
-        monitor1_trans.print();
       `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
-      `uvm_info("compare",$sformatf("-------------------Test PASS---------------------\n"),UVM_LOW)
-      //`uvm_info("MONITOR 2", $sformatf("----Start of MONITOR2----"), UVM_LOW);
-
-        monitor2_trans.print();
+        `uvm_info("COMPARE", $sformatf("WRITE PASS | EXPECTED WDATA = %0h  ACTUAL WDATA =%0h |EXPECTED  WRITE ADDR = %0h ACTUAL WRITE ADDR =%0h",
+                    monitor1_trans.apb_write_data,monitor2_trans.apb_write_data,monitor1_trans.apb_write_paddr,monitor2_trans.apb_write_paddr ), UVM_LOW)
+        $display("-------------------Test PASS---------------------\n");
       end
     else begin
       mismatch++;
-      monitor1_trans.print();
       `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW)
-      `uvm_info("compare",$sformatf("-------------------Test FAIL---------------------\n"),UVM_LOW)
-      monitor2_trans.print();
+      `uvm_error("COMPARE", $sformatf("WRITE FAIL | EXPECTED WDATA = %0h  ACTUAL WDATA =%0h |EXPECTED  WRITE ADDR = %0h ACTUAL WRITE ADDR =%0h",
+                    monitor1_trans.apb_write_data,monitor2_trans.apb_write_data,monitor1_trans.apb_write_paddr,monitor2_trans.apb_write_paddr ), UVM_LOW)
+      $display("-------------------Test FAIL---------------------\n");
     end
 
     end
@@ -152,12 +150,13 @@ begin
       if(monitor1_trans.transfer)begin
         if(monitor1_trans.READ_WRITE)begin
           mem_model[monitor1_trans.apb_write_paddr] = monitor1_trans.apb_write_data;
-          compare_results(monitor1_trans, monitor2_trans);
+          //compare_results(monitor1_trans, monitor2_trans);
         end
         else begin
           monitor1_trans.apb_read_data_out = mem_model[monitor1_trans.apb_read_paddr];
-          compare_results(monitor1_trans,monitor2_trans);
         end
+                  compare_results(monitor1_trans,monitor2_trans);
+
       end
     end
   endtask
