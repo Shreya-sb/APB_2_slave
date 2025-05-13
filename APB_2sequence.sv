@@ -112,16 +112,17 @@ class APB_2writereadSequence_0 extends APB_2sequence;
   virtual task body();
     item = APB_2sequence_item::type_id::create("item");
     //r_item = APB_2sequence_item::type_id::create("r_item");
-    repeat(5)begin
+    repeat(10)begin
     // First randomize and send write item
     `uvm_do_with(item, {
         transfer == 1;
         READ_WRITE == 0;
         apb_write_paddr[8] == 0;
+        //apb_write_paddr[7:0] == 8'hA;
     })
-      `uvm_send(item);
-      w_addr = item.apb_write_paddr;
+      w_addr = item.apb_write_paddr[7:0];
       
+      `uvm_send(item);
      //w_item.apb_write_paddr.rand_mode(0); 
    
   // Then send read item with the same address

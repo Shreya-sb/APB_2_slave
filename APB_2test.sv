@@ -127,9 +127,9 @@ class APB_2readSlave0_test extends APB_2test;
     APB_2readSequence_0 seq;
     phase.raise_objection(this);
     seq = APB_2readSequence_0::type_id::create("seq");
-    repeat(50)begin
+   // repeat(50)begin
     seq.start(env.active_agent.APB_2seqr);
-    end
+   // end
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this,30); 
   endtask 

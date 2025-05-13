@@ -20,6 +20,7 @@ class APB_2driver extends uvm_driver#(APB_2sequence_item);
  
   //Run phase
   task run_phase(uvm_phase phase);
+   repeat(2)@(vif.APB_2driver_cb);
     forever begin
       seq_item_port.get_next_item(req);
       drive();

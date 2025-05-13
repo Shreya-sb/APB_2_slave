@@ -104,9 +104,13 @@ function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item 
     if( monitor1_trans.apb_read_data_out == monitor2_trans.apb_read_data_out && monitor1_trans.apb_read_paddr == monitor2_trans.apb_read_paddr)
       begin
         match++;
+         monitor1_trans.print();
+
         `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW);
         `uvm_info("COMPARE", $sformatf("READ PASS | EXPECTED RDATA = %0h  ACTUAL RDATA =%0h |EXPECTED  READ ADDR = %0h ACTUAL READ ADDR =%0h",
                     monitor1_trans.apb_read_data_out,monitor2_trans.apb_read_data_out,monitor1_trans.apb_read_paddr,monitor2_trans.apb_read_paddr ), UVM_LOW)
+         monitor2_trans.print();
+
         $display("-------------------Test PASS---------------------\n");
       end
     else begin
@@ -114,7 +118,8 @@ function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item 
       monitor1_trans.print();
       `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW);
       `uvm_error("COMPARE", $sformatf("READ PASS | EXPECTED RDATA = %0h  ACTUAL RDATA =%0h |EXPECTED  READ ADDR = %0h ACTUAL READ ADDR =%0h",
-                    monitor1_trans.apb_read_data_out,monitor2_trans.apb_read_data_out,monitor1_trans.apb_read_paddr,monitor2_trans.apb_read_paddr ), UVM_LOW)
+                    monitor1_trans.apb_read_data_out,monitor2_trans.apb_read_data_out,monitor1_trans.apb_read_paddr,monitor2_trans.apb_read_paddr ))
+       monitor2_trans.print();
       $display("-------------------Test FAIL---------------------\n");
     end
    end
@@ -123,21 +128,25 @@ function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item 
      if( monitor1_trans.apb_write_data == monitor2_trans.apb_write_data && monitor1_trans.apb_write_paddr == monitor2_trans.apb_write_paddr)
       begin
         match++;
+        monitor1_trans.print();
       `uvm_info("Match",$sformatf("Match count = %0d", match),UVM_LOW)
         `uvm_info("COMPARE", $sformatf("WRITE PASS | EXPECTED WDATA = %0h  ACTUAL WDATA =%0h |EXPECTED  WRITE ADDR = %0h ACTUAL WRITE ADDR =%0h",
                     monitor1_trans.apb_write_data,monitor2_trans.apb_write_data,monitor1_trans.apb_write_paddr,monitor2_trans.apb_write_paddr ), UVM_LOW)
+          monitor2_trans.print();
         $display("-------------------Test PASS---------------------\n");
       end
     else begin
       mismatch++;
+         monitor1_trans.print();
       `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW)
       `uvm_error("COMPARE", $sformatf("WRITE FAIL | EXPECTED WDATA = %0h  ACTUAL WDATA =%0h |EXPECTED  WRITE ADDR = %0h ACTUAL WRITE ADDR =%0h",
-                    monitor1_trans.apb_write_data,monitor2_trans.apb_write_data,monitor1_trans.apb_write_paddr,monitor2_trans.apb_write_paddr ), UVM_LOW)
+                    monitor1_trans.apb_write_data,monitor2_trans.apb_write_data,monitor1_trans.apb_write_paddr,monitor2_trans.apb_write_paddr ))
+       monitor2_trans.print();
       $display("-------------------Test FAIL---------------------\n");
     end
 
     end
-  end
+ // end
   endfunction
      
     // Main run phase
