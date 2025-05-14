@@ -21,109 +21,104 @@ class APB_2sequence extends uvm_sequence#(APB_2sequence_item);
   
 endclass
 
-//write sequence for slave 0
-class APB_2writeSequence_0 extends APB_2sequence;
-    `uvm_object_utils(APB_2writeSequence_0)
+//write sequence for slave 1
+class APB_2WriteSequence_1 extends APB_2sequence;
+  `uvm_object_utils(APB_2WriteSequence_1)
   
     APB_2sequence_item item;
   
-  function new(string name = "APB_2writeSequence_0");
+  function new(string name = "APB_2WriteSequence_1");
     super.new(name);
   endfunction
   
   virtual task body();
       item = APB_2sequence_item::type_id::create("item");
-   repeat(5) begin
+    repeat(10) begin
     `uvm_do_with(item,{transfer==1; READ_WRITE==0; apb_write_paddr[8]==0;}) 
-     `uvm_send(item);
+     `uvm_send(item)
    end
   endtask
-endclass:APB_2writeSequence_0
+endclass:APB_2WriteSequence_1
 
-//write sequence for slave 1
-class APB_2writeSequence_1 extends APB_2sequence;
-    `uvm_object_utils(APB_2writeSequence_1)
+//write sequence for slave 2
+class APB_2WriteSequence_2 extends APB_2sequence;
+  `uvm_object_utils(APB_2WriteSequence_2)
   
     APB_2sequence_item item;
   
-  function new(string name = "APB_2writeSequence_1");
-    super.new(name);
-  endfunction
-  
-  virtual task body();
-          item = APB_2sequence_item::type_id::create("item");
-    repeat(5) begin
-    `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;})
-      `uvm_send(item);
- end
- endtask
-endclass:APB_2writeSequence_1
-
-//read sequence for slave 0
-class APB_2readSequence_0 extends APB_2sequence;
-  `uvm_object_utils(APB_2readSequence_0)
-  
-    APB_2sequence_item item;
-  
-  function new(string name = "APB_2readSequence_0");
-    super.new(name);
-  endfunction
-  
-  virtual task body();
-      item = APB_2sequence_item::type_id::create("item");
-        repeat(5) begin
-    `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
-                `uvm_send(item);
-        end
-  endtask
-endclass:APB_2readSequence_0
-
-//read sequence for slave 1
-class APB_2readSequence_1 extends APB_2sequence;
-  `uvm_object_utils(APB_2readSequence_1)
-  
-    APB_2sequence_item item;
-  
-  function new(string name = "APB_2readSequence_1");
-    super.new(name);
-  endfunction
-  
-  virtual task body();
-      item = APB_2sequence_item::type_id::create("item");
-        repeat(5) begin
-          `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==1;})
-          `uvm_send(item);
-        end
-  endtask
-endclass:APB_2readSequence_1
-
-
-
-class APB_2writereadSequence_0 extends APB_2sequence;
-  `uvm_object_utils(APB_2writereadSequence_0)
-  
-    APB_2sequence_item item;
-  bit [8:0] w_addr;
-  
-  function new(string name = "APB_2writereadSequence_0");
+  function new(string name = "APB_2WriteSequence_2");
     super.new(name);
   endfunction
   
   virtual task body();
     item = APB_2sequence_item::type_id::create("item");
-    //r_item = APB_2sequence_item::type_id::create("r_item");
+    repeat(10) begin
+    `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;})
+    `uvm_send(item)
+ end
+ endtask
+endclass:APB_2WriteSequence_2
+
+//read sequence for slave 1
+class APB_2ReadSequence_1 extends APB_2sequence;
+  `uvm_object_utils(APB_2ReadSequence_1)
+
+    APB_2sequence_item item;
+  
+  function new(string name = "APB_2ReadSequence_1");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+      item = APB_2sequence_item::type_id::create("item");
+    repeat(10) begin
+    `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
+    `uvm_send(item)
+    end
+  endtask
+endclass:APB_2ReadSequence_1
+
+//read sequence for slave 2
+class APB_2ReadSequence_2 extends APB_2sequence;
+  `uvm_object_utils(APB_2ReadSequence_2)
+  
+    APB_2sequence_item item;
+  
+  function new(string name = "APB_2ReadSequence_2");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+      item = APB_2sequence_item::type_id::create("item");
+    repeat(10) begin
+      `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==1;})
+      `uvm_send(item)
+    end
+  endtask
+endclass:APB_2ReadSequence_2
+
+
+class APB_2WriteReadSequence_1 extends APB_2sequence;
+  `uvm_object_utils(APB_2WriteReadSequence_1)
+  
+    APB_2sequence_item item;
+    bit [8:0] w_addr;
+  
+  function new(string name = "APB_2WriteReadSequence_1");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+    item = APB_2sequence_item::type_id::create("item");
     repeat(10)begin
-    // First randomize and send write item
     `uvm_do_with(item, {
         transfer == 1;
         READ_WRITE == 0;
         apb_write_paddr[8] == 0;
-        //apb_write_paddr[7:0] == 8'hA;
     })
-      w_addr = item.apb_write_paddr[7:0];
+      `uvm_send(item)
+      w_addr = item.apb_write_paddr;
       
-      `uvm_send(item);
-     //w_item.apb_write_paddr.rand_mode(0); 
    
   // Then send read item with the same address
     `uvm_do_with(item, {
@@ -131,25 +126,24 @@ class APB_2writereadSequence_0 extends APB_2sequence;
         READ_WRITE == 1;
         apb_read_paddr == w_addr;
     })
-            `uvm_send(item);
+     `uvm_send(item)
     end
 endtask 
-endclass:APB_2writereadSequence_0
+endclass:APB_2WriteReadSequence_1
 
-class APB_2writereadSequence_1 extends APB_2sequence;
-  `uvm_object_utils(APB_2writereadSequence_1)
+class APB_2WriteReadSequence_2 extends APB_2sequence;
+  `uvm_object_utils(APB_2WriteReadSequence_2)
   
     APB_2sequence_item item;
   bit [8:0] w_addr;
   
-  function new(string name = "APB_2writereadSequence_1");
+  function new(string name = "APB_2WriteReadSequence_2");
     super.new(name);
   endfunction
   
   virtual task body();
     item = APB_2sequence_item::type_id::create("item");
-    //r_item = APB_2sequence_item::type_id::create("r_item");
-    repeat(5)begin
+    repeat(10)begin
     // First randomize and send write item
     `uvm_do_with(item, {
         transfer == 1;
@@ -170,65 +164,5 @@ class APB_2writereadSequence_1 extends APB_2sequence;
             `uvm_send(item);
     end
 endtask 
-endclass:APB_2writereadSequence_1
+endclass:APB_2WriteReadSequence_2
 
-/*class APB_2writereadSequence_1 extends APB_2sequence;
-  `uvm_object_utils(APB_2writereadSequence_1)
-  
-    APB_2sequence_item w_item;
-    APB_2sequence_item r_item;
-
-  
-  function new(string name = "APB_2writereadSequence_1");
-    super.new(name);
-  endfunction
-  
-  virtual task body();
-    w_item = APB_2sequence_item::type_id::create("w_item");
-    r_item = APB_2sequence_item::type_id::create("r_item");
-    `uvm_do_with(w_item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;}) 
-   // w_item.apb_write_paddr.rand_mode(0);
-   // `uvm_do_with(r_item,{transfer==1;READ_WRITE==1;apb_read_paddr == w_item.apb_write_paddr;}) 
-     r_item.transfer = 1;
-    r_item.READ_WRITE = 1;
-    r_item.apb_read_paddr = w_item.apb_write_paddr;
-    r_item.apb_read_paddr.rand_mode(0); // Lock it from being randomized accidentally
-
-    start_item(r_item);
-    finish_item(r_item);
-  endtask
-endclass:APB_2writereadSequence_1
-
-/*class APB_2writereadSequence_1 extends APB_2sequence;
-    `uvm_object_utils(APB_2writereadSequence_1)
-
-    APB_2sequence_item w_item;
-    APB_2sequence_item r_item;
-    bit [31:0] saved_addr; // To store the write address
-
-    function new(string name = "APB_2writereadSequence_1");
-        super.new(name);
-    endfunction
-
-    virtual task body();
-        w_item = APB_2sequence_item::type_id::create("w_item");
-        r_item = APB_2sequence_item::type_id::create("r_item");
-        
-        // First randomize and send write item
-        `uvm_do_with(w_item, {
-            transfer == 1;
-            READ_WRITE == 0;
-            apb_write_paddr[8] == 1;
-        })
-        
-        // Save the write address
-        saved_addr = w_item.apb_write_paddr;
-        
-        // Then send read item with the same address
-        `uvm_do_with(r_item, {
-            transfer == 1;
-            READ_WRITE == 1;
-            apb_read_paddr == saved_addr;
-        })
-    endtask
-endclass: APB_2writereadSequence_1*/
