@@ -20,17 +20,19 @@ class APB_2environment extends uvm_env;
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     active_agent = APB_2active_agent::type_id::create("active_agent", this);
+    // Create the passive agent
+    passive_agent = APB_2passive_agent::type_id::create("passive_agent", this);
+    //create scoreboard 
     scoreboard = APB_2scoreboard::type_id::create("scoreboard", this);
     // Create the coverage collector
     coverage = APB_2coverage::type_id::create("coverage", this);
-    // Create the passive agent
-    passive_agent = APB_2passive_agent::type_id::create("passive_agent", this);
+    
   endfunction
  
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);    
-    active_agent.APB_2mon_1.item_collect_port.connect(scoreboard.item_collect1_export);
-    active_agent.APB_2mon_1.item_collect_port.connect(coverage.cov_in_export);
+    active_agent.APB_2mon_1.item_collect_port1.connect(scoreboard.item_collect1_export);
+    active_agent.APB_2mon_1.item_collect_port1.connect(coverage.cov_in_export);
     passive_agent.APB_2mon_2.item_collect_port2.connect(scoreboard.item_collect2_export);
     passive_agent.APB_2mon_2.item_collect_port2.connect(coverage.cov_out_export);
   endfunction
