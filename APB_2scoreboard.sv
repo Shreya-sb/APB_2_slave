@@ -51,7 +51,7 @@ class APB_2scoreboard extends uvm_scoreboard;
     $display("Enteredwrite");
     input_queue.push_back(input_trans);
     `uvm_info("SB", $sformatf(
-      "EXPECTED TRANSACTION: size = %0d | TRANSFER = %0b | RW = %0b | WDATA = %0h | WPADDR = %0h | RPADDR = %0h",
+      "EXPECTED TRANSACTION: size = %0d | TRANSFER = %0d | RW = %0d | WDATA = %0h | WPADDR = %0h | RPADDR = %0h",
       input_queue.size(), input_trans.transfer, input_trans.READ_WRITE, input_trans.apb_write_data, input_trans.apb_write_paddr, input_trans.apb_read_paddr), UVM_LOW)
   endfunction
   
@@ -59,9 +59,9 @@ class APB_2scoreboard extends uvm_scoreboard;
   function void write_monitor2port(APB_2sequence_item output_trans);
     $display("Entered monitor2 write");
     output_queue.push_back(output_trans);
-    "ACTUAL TRANSACTION: size = %0d | TRANSFER = %0b | RW = %0b | WPADDR = %0h | WDATA = %0h | RDATA = %0h | RPADDR = %0h",
+    `uvm_info("SB", $sformatf(
+    "ACTUAL TRANSACTION: size = %0d | TRANSFER = %0d | RW = %0d | WPADDR = %0h | WDATA = %0h | RDATA = %0h | RPADDR = %0h",
       output_queue.size(), output_trans.transfer, output_trans.READ_WRITE, output_trans.apb_write_paddr, output_trans.apb_write_data, output_trans.apb_read_data_out, output_trans.apb_read_paddr), UVM_LOW)
-  endfunction
   endfunction
   
     // Comparison logic

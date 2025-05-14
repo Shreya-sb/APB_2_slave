@@ -24,7 +24,7 @@ APB_Protocol dut (.PCLK(pclk),.PRESETn(presetn),
   initial begin
     presetn = 0;
     #10 presetn = 1;
-    #15 presetn = 0;
+//    #15 presetn = 0;
   end
   
   //apb_slave dut();

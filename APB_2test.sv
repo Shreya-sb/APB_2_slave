@@ -45,14 +45,14 @@ endfunction*/
   
   task run_phase (uvm_phase phase);
     phase.raise_objection (this);
-    seq = Apb_2sequence::type_id::create("seq");
+    seq = APB_2sequence::type_id::create("seq");
     phase.drop_objection (this);
   endtask: run_phase
 endclass
 
 class APB_2WriteSlave1_test extends APB_2test;
 
-  `uvm_component_utils(APB_2WiteSlave1_test)
+  `uvm_component_utils(APB_2WriteSlave1_test)
 
 //Constructor
   function new(string name = "APB_2WriteSlave1_test",uvm_component parent);
