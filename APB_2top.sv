@@ -30,13 +30,11 @@ APB_Protocol dut (.PCLK(pclk),.PRESETn(presetn),
   //apb_slave dut();
  
   initial begin
-    uvm_config_db#(virtual APB_2interface)::set(uvm_root::get(),"*","vif",intf);
-    $dumpfile("dump.vcd");
-    $dumpvars;
+    uvm_config_db#(virtual APB_2interface)::set(null,"*","vif",intf);
   end
  
   initial begin
-    run_test("APB_2writereadSlave0_test");
+    run_test("APB_2WriteReadSlave1_test");
   end
  
 endmodule
