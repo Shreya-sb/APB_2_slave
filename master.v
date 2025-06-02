@@ -1,5 +1,4 @@
 
-
 `timescale 1ns/1ns
 
   module master_bridge(
@@ -46,14 +45,10 @@
 		     IDLE: begin 
 		              PENABLE =0;
 
-		            if(transfer)   ///! transfer ut should be
-	        	     // next_state = IDLE ;
-                       next_state = SETUP;
-
+		            if(!transfer)
+	        	      next_state = IDLE ;
 	                    else
-                       next_state = IDLE ;
-
-			          // next_state = SETUP;
+			      next_state = SETUP;
 	                   end
 
 	       	SETUP:   begin
@@ -68,7 +63,7 @@
                                   PADDR = apb_write_paddr;
 				  PWDATA = apb_write_data;  end
 			    
-			    if(transfer && !PSLVERR)//// ! pslverr
+			    if(transfer && !PSLVERR)
 			      next_state = ENABLE;
 		            else
            	              next_state = IDLE;
@@ -174,7 +169,7 @@
 		             end
 	      endcase
       end */
-     assign {PSEL1,PSEL2} = ((state == SETUP || state == ENABLE)?(PADDR[8] ? {1'b0,1'b1} : {1'b1,1'b0}):2'd0);// state 1=idle it should be
+     assign {PSEL1,PSEL2} = ((state != IDLE) ? (PADDR[8] ? {1'b0,1'b1} : {1'b1,1'b0}) : 2'd0);
 
   // PSLVERR LOGIC
   
