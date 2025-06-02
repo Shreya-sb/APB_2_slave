@@ -5,7 +5,8 @@
 module slave2(
          input PCLK,PRESETn,
          input PSEL,PENABLE,PWRITE,
-         input [7:0]PADDR,PWDATA,
+         input [7:0]PADDR,
+         input [7:0]PWDATA,
         output [7:0]PRDATA2,
         output reg PREADY );
     
@@ -23,13 +24,14 @@ module slave2(
               PREADY = 0;
           else
 	  if(PSEL && !PENABLE && !PWRITE)
-	     begin PREADY = 0; end
+	     begin  
+          PREADY = 0; end
 	         
 	  else if(PSEL && PENABLE && !PWRITE)
 	     begin  PREADY = 1;
-                    reg_addr =  PADDR; 
+                reg_addr =  PADDR; 
 	       end
-          else if(PSEL && !PENABLE && PWRITE)  //!penable
+          else if(PSEL && !PENABLE && PWRITE)
 	     begin  PREADY = 0; end
 
 	  else if(PSEL && PENABLE && PWRITE)
@@ -38,4 +40,5 @@ module slave2(
 
            else PREADY = 0;
         end
+
     endmodule
