@@ -166,9 +166,9 @@ class APB_2ContinuousWRSequence_2 extends APB_2sequence;
 endtask 
 endclass:APB_2WriteReadSequence_2
 
-class ApbTransferValiditySequence extends ApbSequence;
-  `uvm_object_utils(ApbTransferValiditySequence)
-  function new(string name = "ApbTransferValiditySequence");
+class APB_2TransferValiditySequence extends APB_2sequence;
+  `uvm_object_utils(APB_2TransferValiditySequence)
+  function new(string name = "APB_2TransferValiditySequence");
     super.new(name);
   endfunction
 
