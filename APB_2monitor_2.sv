@@ -29,25 +29,28 @@ class APB_2monitor_2 extends uvm_monitor;
   endfunction
  
   // Run phase
-  task run_phase(uvm_phase phase);
+ virtual  task run_phase(uvm_phase phase);
     //Define a task for run phase 
-     //repeat(1)@(vif.APB_2monitor_cb);
+   @(vif.APB_2monitor_cb);
     forever begin
-      @(vif.APB_2monitor_cb)
-      
-      // Sample DUT information and populate the transaction
+      @(vif.APB_2monitor_cb);
+       // Sample DUT information and populate the transaction
       APB_2mon_item.transfer         = vif.APB_2monitor_cb.transfer;
       APB_2mon_item.READ_WRITE       = vif.APB_2monitor_cb.READ_WRITE;
-      APB_2mon_item.apb_write_paddr  = vif.APB_2monitor_cb.apb_write_paddr;
-      APB_2mon_item.apb_write_data   = vif.APB_2monitor_cb.apb_write_data;
+      if(vif.APB_2monitor_cb.READ_WRITE)begin
       APB_2mon_item.apb_read_paddr   = vif.APB_2monitor_cb.apb_read_paddr;
       APB_2mon_item.apb_read_data_out= vif.APB_2monitor_cb.apb_read_data_out;
-      
-      // Broadcast the transaction using the analysis port
+      end
+      else begin
+      APB_2mon_item.apb_write_data   = vif.APB_2monitor_cb.apb_write_data; 
+      APB_2mon_item.apb_write_paddr  = vif.APB_2monitor_cb.apb_write_paddr;
+      end  
       item_collect_port2.write(APB_2mon_item);
       `uvm_info("MONITOR_2", $sformatf("----Start of Monitor_2----"), UVM_LOW);      
-      `uvm_info("MONITOR_2",$sformatf("transfer=%0d READ_WRITE=%0d apb_write_paddr=%0d,apb_write_data=%0d,apb_read_paddr=%0d,apb_read_data_out=%0d",APB_2mon_item.transfer,APB_2mon_item.READ_WRITE,APB_2mon_item.apb_write_paddr,APB_2mon_item.apb_write_data,APB_2mon_item.apb_read_paddr,APB_2mon_item.apb_read_data_out),UVM_LOW)
-	  //repeat(2)@(vif.APB_2monitor_cb); 
+      //`uvm_info("MONITOR_2",$sformatf("transfer=%0d READ_WRITE=%0d apb_write_paddr=%0d,apb_write_data=%0d,apb_read_paddr=%0d,apb_read_data_out=%0d",APB_2mon_item.transfer,APB_2mon_item.READ_WRITE,APB_2mon_item.apb_write_paddr,APB_2mon_item.apb_write_data,APB_2mon_item.apb_read_paddr,APB_2mon_item.apb_read_data_out),UVM_LOW)
+	  
+      APB_2mon_item.print();
+      repeat(2)@(vif.APB_2monitor_cb); 
     end
   endtask
  

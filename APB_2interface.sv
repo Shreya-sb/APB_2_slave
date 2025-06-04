@@ -17,7 +17,6 @@ interface APB_2interface(input bit pclk,presetn);
     output apb_write_paddr;
     output apb_write_data;
     output apb_read_paddr;
-    input presetn;
   endclocking
   
   clocking APB_2monitor_cb @(posedge pclk);

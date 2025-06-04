@@ -20,7 +20,7 @@ class APB_2driver extends uvm_driver#(APB_2sequence_item);
  
   //Run phase
   task run_phase(uvm_phase phase);
-   repeat(2) @(vif.APB_2driver_cb);
+ //  repeat(2) @(vif.APB_2driver_cb);
     forever begin
       seq_item_port.get_next_item(req);
       drive();
@@ -29,10 +29,22 @@ class APB_2driver extends uvm_driver#(APB_2sequence_item);
   endtask
   
   //Drive task to drive all the signals into the DUT
-  task drive();
+ virtual task drive();
     //drive data
- @(vif.APB_2driver_cb)
+ @(vif.APB_2driver_cb);
+  if (!vif.presetn)
+      begin
+//      @(vif.drv_cb);
+        vif.transfer <='b0;
+        vif.READ_WRITE <='b0;
+        vif.apb_write_paddr <='b0;
+        vif.apb_write_data <= 'b0;
+        vif.apb_read_paddr <= 'b0;
+     end
+   else
     begin
+   repeat(4)
+     @(vif.APB_2driver_cb);
       vif.APB_2driver_cb.transfer <= req.transfer;
       vif.APB_2driver_cb.READ_WRITE <= req.READ_WRITE;
      if(req.transfer)
