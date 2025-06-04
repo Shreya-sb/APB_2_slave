@@ -33,9 +33,8 @@ class APB_2WriteSequence_1 extends APB_2sequence;
   
   virtual task body();
     item = APB_2sequence_item::type_id::create("item");
-    repeat(2) begin
+    repeat(10) begin
     `uvm_do_with(item,{transfer==1; READ_WRITE==0; apb_write_paddr[8]==0;}) 
-  //   `uvm_send(item)
    end
   endtask
 endclass:APB_2WriteSequence_1
@@ -43,9 +42,7 @@ endclass:APB_2WriteSequence_1
 //write sequence for slave 2
 class APB_2WriteSequence_2 extends APB_2sequence;
   `uvm_object_utils(APB_2WriteSequence_2)
-  
     APB_2sequence_item item;
-  
   function new(string name = "APB_2WriteSequence_2");
     super.new(name);
   endfunction
@@ -54,7 +51,6 @@ class APB_2WriteSequence_2 extends APB_2sequence;
     item = APB_2sequence_item::type_id::create("item");
     repeat(10) begin
     `uvm_do_with(item,{transfer==1;READ_WRITE==0;apb_write_paddr[8]==1;})
-    //`uvm_send(item)
  end
  endtask
 endclass:APB_2WriteSequence_2
@@ -62,9 +58,7 @@ endclass:APB_2WriteSequence_2
 //read sequence for slave 1
 class APB_2ReadSequence_1 extends APB_2sequence;
   `uvm_object_utils(APB_2ReadSequence_1)
-
     APB_2sequence_item item;
-  
   function new(string name = "APB_2ReadSequence_1");
     super.new(name);
   endfunction
@@ -73,7 +67,6 @@ class APB_2ReadSequence_1 extends APB_2sequence;
       item = APB_2sequence_item::type_id::create("item");
     repeat(10) begin
     `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==0;}) 
-   // `uvm_send(item)
     end
   endtask
 endclass:APB_2ReadSequence_1
@@ -81,9 +74,7 @@ endclass:APB_2ReadSequence_1
 //read sequence for slave 2
 class APB_2ReadSequence_2 extends APB_2sequence;
   `uvm_object_utils(APB_2ReadSequence_2)
-  
     APB_2sequence_item item;
-  
   function new(string name = "APB_2ReadSequence_2");
     super.new(name);
   endfunction
@@ -92,7 +83,6 @@ class APB_2ReadSequence_2 extends APB_2sequence;
       item = APB_2sequence_item::type_id::create("item");
     repeat(10) begin
       `uvm_do_with(item,{transfer==1;READ_WRITE==1;apb_write_paddr[8]==1;})
-     // `uvm_send(item)
     end
   endtask
 endclass:APB_2ReadSequence_2
@@ -100,7 +90,6 @@ endclass:APB_2ReadSequence_2
 
 class APB_2WriteReadSequence_1 extends APB_2sequence;
   `uvm_object_utils(APB_2WriteReadSequence_1)
-  
     APB_2sequence_item item;
     bit [8:0] w_addr;
   
@@ -111,29 +100,15 @@ class APB_2WriteReadSequence_1 extends APB_2sequence;
   virtual task body();
     item = APB_2sequence_item::type_id::create("item");
     repeat(10)begin
-    `uvm_do_with(item, {
-        transfer == 1;
-        READ_WRITE == 0;
-        apb_write_paddr[8] == 0;
-    })
-      //`uvm_send(item)
+    `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr[8] == 0;})
       w_addr = item.apb_write_paddr;
-      
-   
-  // Then send read item with the same address
-    `uvm_do_with(item, {
-        transfer == 1;
-        READ_WRITE == 1;
-        apb_read_paddr == w_addr;
-    })
-     //`uvm_send(item)
+      `uvm_do_with(item, {transfer == 1;READ_WRITE == 1;apb_read_paddr == w_addr;})
     end
 endtask 
 endclass:APB_2WriteReadSequence_1
 
 class APB_2WriteReadSequence_2 extends APB_2sequence;
   `uvm_object_utils(APB_2WriteReadSequence_2)
-  
     APB_2sequence_item item;
   bit [8:0] w_addr;
   
@@ -144,25 +119,69 @@ class APB_2WriteReadSequence_2 extends APB_2sequence;
   virtual task body();
     item = APB_2sequence_item::type_id::create("item");
     repeat(10)begin
-    // First randomize and send write item
-    `uvm_do_with(item, {
-        transfer == 1;
-        READ_WRITE == 0;
-      apb_write_paddr[8] == 1;
-    })
-      //`uvm_send(item);
+    `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr[8] == 1;})
       w_addr = item.apb_write_paddr;
-      
-     //w_item.apb_write_paddr.rand_mode(0); 
-   
-  // Then send read item with the same address
-    `uvm_do_with(item, {
-        transfer == 1;
-        READ_WRITE == 1;
-        apb_read_paddr == w_addr;
-    })
-      //      `uvm_send(item);
+      `uvm_do_with(item,{transfer == 1;READ_WRITE == 1;apb_read_paddr == w_addr;})
     end
 endtask 
 endclass:APB_2WriteReadSequence_2
 
+class APB_2ContinuousWRSequence_1 extends APB_2sequence;
+  `uvm_object_utils(APB_2ContinuousWRSequence_1)
+    APB_2sequence_item item;
+  bit [8:0] w_addr;
+  
+  function new(string name = "APB_2ContinuousWRSequence_1");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+    item = APB_2sequence_item::type_id::create("item");
+    repeat(10)begin
+      `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr[8] == 0;})
+      w_addr = item.apb_write_paddr;
+      `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr == w_addr;apb_write_paddr[8] == 0;})
+      `uvm_do_with(item,{transfer == 1;READ_WRITE == 1;apb_read_paddr == w_addr;})
+    end
+endtask 
+endclass:APB_2WriteReadSequence_1
+
+class APB_2ContinuousWRSequence_2 extends APB_2sequence;
+  `uvm_object_utils(APB_2ContinuousWRSequence_2)
+    APB_2sequence_item item;
+  bit [8:0] w_addr;
+  
+  function new(string name = "APB_2ContinuousWRSequence_2");
+    super.new(name);
+  endfunction
+  
+  virtual task body();
+    item = APB_2sequence_item::type_id::create("item");
+    repeat(10)begin
+      `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr[8] == 1;})
+      w_addr = item.apb_write_paddr;
+      `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr == w_addr;apb_write_paddr[8] == 1;})
+      `uvm_do_with(item,{transfer == 1;READ_WRITE == 1;apb_read_paddr == w_addr;})
+    end
+endtask 
+endclass:APB_2WriteReadSequence_2
+
+class ApbTransferValiditySequence extends ApbSequence;
+  `uvm_object_utils(ApbTransferValiditySequence)
+  function new(string name = "ApbTransferValiditySequence");
+    super.new(name);
+  endfunction
+
+    APB_2sequence_item item;
+
+  virtual task body();
+    item = APB_2sequence_item::type_id::create("item");
+    repeat(4) 
+      begin
+      `uvm_do_with(item, {transfer == 0;})
+      #50;
+      `uvm_do_with(item, {transfer == 1;})
+      #50;
+      end
+  endtask
+endclass
