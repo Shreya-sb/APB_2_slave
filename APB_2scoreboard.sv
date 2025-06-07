@@ -25,7 +25,7 @@ class APB_2scoreboard extends uvm_scoreboard;
   APB_2sequence_item monitor1_trans;
   APB_2sequence_item monitor2_trans;
   
-    bit [7:0] mem_model[0:255];
+    bit [8:0] mem_model[0:512];
  
   int match = 0;
   int  mismatch = 0;  
@@ -122,7 +122,7 @@ function void compare_results(APB_2sequence_item input_trans,APB_2sequence_item 
     else begin
       mismatch++;
       monitor1_trans.print();
-      `uvm_info("Mismatch",$sformatf("Mismatch count = %0d", mismatch),UVM_LOW);
+      `uvm_info("Mismatch",$sformatf("Mismatch count = %0d, %0t", mismatch, $time),UVM_LOW);
       `uvm_error("COMPARE", $sformatf("READ PASS | EXPECTED RDATA = %0h  ACTUAL RDATA =%0h |EXPECTED  READ ADDR = %0h ACTUAL READ ADDR =%0h",
                     monitor1_trans.apb_read_data_out,monitor2_trans.apb_read_data_out,monitor1_trans.apb_read_paddr,monitor2_trans.apb_read_paddr ))
        monitor2_trans.print();

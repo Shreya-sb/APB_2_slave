@@ -29,7 +29,7 @@ class APB_2monitor_1 extends uvm_monitor;
  
   // Run phase
  virtual task run_phase(uvm_phase phase);
-   // repeat(1)@(vif.APB_2monitor_cb);
+   repeat(2)@(vif.APB_2monitor_cb);
     APB_2mon_item = APB_2sequence_item::type_id::create("APB_2mon_item", this);
 
     forever begin

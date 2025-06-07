@@ -31,7 +31,7 @@ class APB_2monitor_2 extends uvm_monitor;
   // Run phase
  virtual  task run_phase(uvm_phase phase);
     //Define a task for run phase 
-   @(vif.APB_2monitor_cb);
+   repeat(2)@(vif.APB_2monitor_cb);
     forever begin
       @(vif.APB_2monitor_cb);
        // Sample DUT information and populate the transaction
@@ -50,7 +50,7 @@ class APB_2monitor_2 extends uvm_monitor;
       //`uvm_info("MONITOR_2",$sformatf("transfer=%0d READ_WRITE=%0d apb_write_paddr=%0d,apb_write_data=%0d,apb_read_paddr=%0d,apb_read_data_out=%0d",APB_2mon_item.transfer,APB_2mon_item.READ_WRITE,APB_2mon_item.apb_write_paddr,APB_2mon_item.apb_write_data,APB_2mon_item.apb_read_paddr,APB_2mon_item.apb_read_data_out),UVM_LOW)
 	  
       APB_2mon_item.print();
-      repeat(2)@(vif.APB_2monitor_cb); 
+     repeat(4)@(vif.APB_2monitor_cb); 
     end
   endtask
  

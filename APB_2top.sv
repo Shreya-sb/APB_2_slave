@@ -34,7 +34,7 @@ APB_Protocol dut (.PCLK(pclk),.PRESETn(presetn),
   end
  
   initial begin
-    run_test("APB_2WriteReadSlave1_test");
+    run_test("APB_2ContinuousWRSlave2_test");
   end
  
 endmodule

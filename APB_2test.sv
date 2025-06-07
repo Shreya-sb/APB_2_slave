@@ -251,7 +251,7 @@ endclass
 
 class APB_2TransferValidityTest  extends APB_2test;
   `uvm_component_utils(APB_2TransferValidityTest)
-  ApbTransferValiditySequence  seq;
+  APB_2TransferValiditySequence  seq;
   function new(string name = "APB_2TransferValidityTest",uvm_component parent);
     super.new(name,parent);
   endfunction
@@ -269,7 +269,7 @@ class APB_2TransferValidityTest  extends APB_2test;
  //run phase 
   virtual task run_phase(uvm_phase phase);
     phase.raise_objection(this);
-    seq = ApbTransferValiditySequence::type_id::create("seq");
+    seq = APB_2TransferValiditySequence::type_id::create("seq");
     seq.start(env.active_agent.APB_2seqr);
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this,100); 

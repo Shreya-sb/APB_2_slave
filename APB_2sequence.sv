@@ -144,7 +144,7 @@ class APB_2ContinuousWRSequence_1 extends APB_2sequence;
       `uvm_do_with(item,{transfer == 1;READ_WRITE == 1;apb_read_paddr == w_addr;})
     end
 endtask 
-endclass:APB_2WriteReadSequence_1
+endclass
 
 class APB_2ContinuousWRSequence_2 extends APB_2sequence;
   `uvm_object_utils(APB_2ContinuousWRSequence_2)
@@ -160,11 +160,11 @@ class APB_2ContinuousWRSequence_2 extends APB_2sequence;
     repeat(10)begin
       `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr[8] == 1;})
       w_addr = item.apb_write_paddr;
-      `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr == w_addr;apb_write_paddr[8] == 1;})
+      `uvm_do_with(item, {transfer == 1;READ_WRITE == 0;apb_write_paddr == w_addr;})
       `uvm_do_with(item,{transfer == 1;READ_WRITE == 1;apb_read_paddr == w_addr;})
     end
 endtask 
-endclass:APB_2WriteReadSequence_2
+endclass
 
 class APB_2TransferValiditySequence extends APB_2sequence;
   `uvm_object_utils(APB_2TransferValiditySequence)
